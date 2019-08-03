@@ -1,7 +1,7 @@
 <div class="cui-topbar">
   <!-- left aligned items -->
-  <div class="cui-topbar-left">
-    <div class="cui-topbar-item">
+  <div class="cui-topbar-left invisible">
+    <div class="cui-topbar-item invisible">
       <div class="dropdown">
         <a href="" class="dropdown-toggle text-nowrap" data-toggle="dropdown" aria-expanded="false">
           <i class="icmn-folder-open mr-2"></i>
@@ -175,8 +175,8 @@
     </div>
   </div>
   <!-- right aligned items -->
-  <div class="cui-topbar-right">
-    <div class="cui-topbar-item d-none d-md-block">
+  <div class="cui-topbar-right ">
+    <div class="cui-topbar-item d-none d-md-block invisible">
       <a
         href="https://themeforest.net/item/clean-ui-html-bootstrap-admin-template/22827565?ref=mediatec_software"
         target="_blank"
@@ -184,7 +184,7 @@
         >Buy Pro 21$</a
       >
     </div>
-    <div class="cui-topbar-item d-none d-lg-block ml-0">
+    <div class="cui-topbar-item d-none d-lg-block ml-0 invisible">
       <div class="cui-topbar-mini-chart text-nowrap">
         Server Load:
         <div class="cui-topbar-mini-chart-inner">
@@ -201,12 +201,12 @@
         20%
       </div>
     </div>
-    <div class="cui-topbar-item">
+    <div class="cui-topbar-item invisible">
       <div class="dropdown">
-        <a href="" class="dropdown-toggle text-nowrap" data-toggle="dropdown" aria-expanded="false">
+        <a href="" class="dropdown-toggle text-nowrap " data-toggle="dropdown" aria-expanded="false">
           <i class="menu-notification-icon icmn-home"></i>
         </a>
-        <div class="dropdown-menu dropdown-menu-right" role="menu">
+        <div class="dropdown-menu dropdown-menu-right invisible" role="menu">
           <div class="cui-topbar-activity">
             <div class="cui-topbar-activity-item">
               <i class="cui-topbar-activity-icon icmn-star-full"></i>
@@ -296,7 +296,7 @@
         </div>
       </div>
     </div>
-    <div class="cui-topbar-item">
+    <div class="cui-topbar-item ">
       <div class="dropdown cui-topbar-avatar-dropdown">
         <a href="" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
           <span class="cui-topbar-avatar">
@@ -304,21 +304,20 @@
           </span>
         </a>
         <div class="dropdown-menu dropdown-menu-right" role="menu">
-          <a class="dropdown-item" href="javascript:void(0)"
-            ><i class="dropdown-icon icmn-user"></i> Profile</a
-          >
+          <a class="dropdown-item" href="javascript:void(0)"><i class="dropdown-icon icmn-user"></i> Perfil</a>
           <div class="dropdown-divider"></div>
           <div class="dropdown-header">Home</div>
-          <a class="dropdown-item" href="javascript:void(0)"
+          <!-- 
+          <a class="dropdown-item invisible" href="javascript:void(0)"
             ><i class="dropdown-icon icmn-circle-right"></i> System Dashboard</a
           >
-          <a class="dropdown-item" href="javascript:void(0)"
+          <a class="dropdown-item invisible" href="javascript:void(0)"
             ><i class="dropdown-icon icmn-circle-right"></i> User Boards</a
           >
-          <a class="dropdown-item" href="javascript:void(0)"
+          <a class="dropdown-item invisible" href="javascript:void(0)"
             ><i class="dropdown-icon icmn-circle-right"></i> Issue Navigator
             <span class="badge badge-success font-size-11 ml-2">25 New</span></a
-          >
+          > -->
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="javascript:void(0)"
             ><i class="dropdown-icon icmn-exit"></i> Logout</a

@@ -8,7 +8,7 @@
       <a href="/">
         <img
           class="cui-menu-left-logo-default"
-          src="/cleanui/components/dummy-assets/common/img/logo-inverse.png"
+          src="/images/logo-header-inverse.png"
           alt=""
         />
         <img

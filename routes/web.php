@@ -358,3 +358,33 @@ Route::prefix('icons')->group(function () {
   });
 });
 
+
+
+/*
+|--------------------------------------------------------------------------
+| EMPAQUE ROUTES PAGEs
+|--------------------------------------------------------------------------
+*/
+ 
+Route::resource('usuarios','UsuariosController');
+/*
+Route::prefix('Usuarios')->group(function () {
+  Route::get('alpha', function () {
+    return view('pages.dashboard.alpha');
+  });
+  Route::get('beta', function () {
+    return view('pages.dashboard.beta');
+  });
+  Route::get('crypto', function () {
+    return view('pages.dashboard.crypto');
+  });
+  Route::get('gamma', function () {
+    return view('pages.dashboard.gamma');
+  });
+  Route::get('docs', function () {
+    return view('pages.dashboard.docs');
+  });
+});*/ Route::get('alpha', function () {
+    return view('pages.dashboard.alpha');
+  });
+
