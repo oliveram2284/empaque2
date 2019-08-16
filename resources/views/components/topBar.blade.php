@@ -334,6 +334,12 @@
 </div>
 
 <script>
+    ;(function($) {
+      $(function() {
+        
+      })
+    })(jQuery)
+  /*
   ;(function($) {
     'use strict'
     $(function() {
@@ -364,5 +370,5 @@
       close.on('click', setHidden)
       document.addEventListener('keydown', handleKeyDown, false)
     })
-  })(jQuery)
+  })(jQuery)*/
 </script>

@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Requests\InventoryCreateRequest;
 use App\Http\Requests\InventoryUpdateRequest;
 
+use App\Usuarios;
 class UsuariosController extends Controller
 {
     /**
@@ -26,7 +27,6 @@ class UsuariosController extends Controller
         $users = DB::select('select * from usuarios;');
         $grupos = DB::select('select * from tbl_grupos;');
         $categorias = DB::select('select * from categoria_usuarios;');
-        
         $params=array(
             'usuarios'   => $users,
             'grupos'     => $grupos,
@@ -55,6 +55,21 @@ class UsuariosController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request);
+
+        $usuario = new Usuarios;
+        $params=$request->all();
+        $params['creado_por']=0;
+        $params['id_tipo']=0;
+        $params['id_sector']=0;
+        $params['id_puesto']=0;
+        
+        //dd($params);
+        $usuario->fill($params);
+
+        //dd($usuario);
+        $result= $usuario->save();
+        return Redirect()->route('usuarios');
         //
     }
 

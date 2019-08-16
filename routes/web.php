@@ -374,6 +374,7 @@ Route::prefix('icons')->group(function () {
  
 //Route::resource('usuarios','UsuariosController');
 Route::get('/usuarios','UsuariosController@index')->name('usuarios');
+Route::post('/usuarios_add','UsuariosController@store')->name('usuarios.add');
 Route::get('/grupos', 'UsuariosController@grupo_index')->name('grupos');
 /*
 Route::prefix('Usuarios')->group(function () {

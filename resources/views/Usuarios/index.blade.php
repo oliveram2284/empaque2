@@ -8,7 +8,7 @@
       <strong>Usuarios</strong>      
     </span>
     <a href="#" class="btn btn-sm btn-icon btn-primary mr-2 pull-right invisible"><i class="icmn-plus" aria-hidden="true"></i> Nuevo Usuario</a>
-    <a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#create">   Nueva tarea  </a>
+    <a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#create_modal">   Nueva tarea  </a>
   </div>
   <div class="card-body">
     <div class="row">
@@ -88,6 +88,12 @@
         fixedColumns: true,
       })*/
     })
+
+    $("#save_bt").on('click',function(){
+      //alert("FIN");
+      $("#create_modal form").trigger('submit');
+      return;
+    });
   })(jQuery)
 </script>
 <!-- END: page scripts -->
