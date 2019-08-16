@@ -20,6 +20,33 @@
     </div>
     <div class="cui-menu-left-scroll">
       <ul class="cui-menu-left-list cui-menu-left-list-root">
+
+          <li class="cui-menu-left-item cui-menu-left-submenu">
+              <a href="javascript: void(0);">
+                <span class="cui-menu-left-icon icmn-file-text"></span>
+                <span class="cui-menu-left-title">Seguridad</span>
+              </a>
+              <ul class="cui-menu-left-list">
+                <li class="cui-menu-left-item">
+                  <a href="{{ route('usuarios') }}">
+                    <span class="cui-menu-left-title">Usuarios</span>
+                  </a>
+                </li>
+                <li class="cui-menu-left-item">
+                    <a href="{{ route('grupos') }}">
+                      <span class="cui-menu-left-title">Grupos</span>
+                    </a>
+                  </li>
+                
+                
+                
+                
+              </ul>
+            </li> 
+
+
+
+
         <li class="cui-menu-left-item">
           <a href="javascript: void(0);" class="cui-menu-right-action-toggle">
             <span class="cui-menu-left-icon icmn-cog"></span>

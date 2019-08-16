@@ -59,7 +59,7 @@
                 <div class="form-group ">
 
                     <label for="email" class="col-form-label">{{ __('E-Mail Address') }}</label>
-                    <input id="email" type="email" data-validation="[EMAIL]" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                    <input id="email" type="text" data-validation="[EMAIL]" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                     @error('email')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -87,55 +87,6 @@
                 </div>
             </form>
 
-            <!--
-              <form id="form-validation" name="form-validation" method="POST">
-              <div class="form-group">
-                <label class="form-label">Usuario</label>
-                <input
-                  id="validation-email"
-                  class="form-control"
-                  placeholder="Email or Username"
-                  name="validation[email]"
-                  type="text"
-                  data-validation="[EMAIL]"
-                />
-              </div>
-              <div class="form-group">
-                <label class="form-label">Contraseña</label>
-                <input
-                  id="validation-password"
-                  class="form-control password"
-                  name="validation[password]"
-                  type="password"
-                  data-validation="[L>=6]"
-                  data-validation-message="$ must be at least 6 characters"
-                  placeholder="Password"
-                />
-              </div>
-              <!-- 
-              <div class="form-group">
-                <a
-                  href="javascript: void(0);"
-                  class="pull-right cui-utils-link-blue cui-utils-link-underlined"
-                  >Forgot Password?</a
-                >
-                <div class="checkbox">
-                  <label>
-                    <input type="checkbox" name="example6" checked />
-                    Remember me
-                  </label>
-                </div>
-              </div> -->
-              <div class="form-actions">
-                <button type="submit" class="btn btn-primary btn-block mr-3">Ingresar</button>  
-                <!--              
-                <span class="register-link">
-                  <a href="" class="cui-utils-link-blue cui-utils-link-underlined">Register</a> 
-                  Si no esta resgistrado 
-                </span>    -->          
-              </div>
-              
-            </form>
           </div>
         </div>
       </div>

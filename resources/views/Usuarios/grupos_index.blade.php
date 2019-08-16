@@ -5,10 +5,9 @@
 <section class="card">
   <div class="card-header">
     <span class="cui-utils-title">
-      <strong>Usuarios</strong>      
+      <strong>Grupos de Usuarios</strong>      
     </span>
-    <a href="#" class="btn btn-sm btn-icon btn-primary mr-2 pull-right invisible"><i class="icmn-plus" aria-hidden="true"></i> Nuevo Usuario</a>
-    <a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#create">   Nueva tarea  </a>
+    <a href="#" class="btn btn-sm btn-icon btn-primary mr-2 pull-right"><i class="icmn-plus" aria-hidden="true"></i> Nuevo Grupo Usuario</a>
   </div>
   <div class="card-body">
     <div class="row">
@@ -18,29 +17,21 @@
             <thead>
               <tr>
                 <th>[]</th>
-                <th>Usuario</th>
                 <th>Nombre</th>
-                <th>Grupo</th>
-                <th>Categoria</th>
+                <th>Es Administrador?</th>
                 <th class="text-center">Acción</th>
               </tr>
             </thead>
             <tbody>
-                <?php foreach($usuarios as $usuario):?>
+                <?php foreach($grupos as $grupo):?>
                     <tr>
-                        <td><?php echo $usuario->id_usuario;?></td>
-                        <td><?php echo $usuario->nombre;?></td>
-                        <td><?php echo $usuario->nombre_real;?></td>
-                        <td><?php echo $usuario->id_grupo;?></td>
-                        <td><?php echo $usuario->catId;?></td>
+                        <td><?php echo $grupo->id_grupo;?></td>
+                        <td><?php echo $grupo->descripcion;?></td>
+                        <td><?php echo ($grupo->administrador=='0')?'NO':'SI';?></td>
                         <td class="text-center">
                             <a class="btn btn-sm btn-icon btn-success  mr-2">
                                 <i class="icmn-pencil" aria-hidden="true"></i>                            
                             </a>
-                            <a class="btn btn-sm btn-icon btn-primary mr-2 ">
-                                <i class="icmn-key" aria-hidden="true"></i>                            
-                            </a>
-
                             <a class="btn btn-sm btn-icon btn-danger mr-2 ">
                                 <i class="icmn-bin" aria-hidden="true"></i>                            
                             </a>
@@ -57,11 +48,6 @@
    
   </div>
 </section>
-
-
-@include('usuarios/form');
-
-
 <!-- END: tables/datatables -->
 
 <!-- START: page scripts -->

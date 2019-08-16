@@ -3,7 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Input;
+
 use Illuminate\Support\Facades\DB;
+
+use App\Http\Requests\InventoryCreateRequest;
+use App\Http\Requests\InventoryUpdateRequest;
+
 class UsuariosController extends Controller
 {
     /**
@@ -15,9 +24,16 @@ class UsuariosController extends Controller
     {
         
         $users = DB::select('select * from usuarios;');
-        //dd($users);
+        $grupos = DB::select('select * from tbl_grupos;');
+        $categorias = DB::select('select * from categoria_usuarios;');
         
-        return view('usuarios.index',array('usuarios'=>$users));
+        $params=array(
+            'usuarios'   => $users,
+            'grupos'     => $grupos,
+            'categorias' => $categorias,
+        );
+        
+        return view('usuarios.index',$params);
 
     }
 
@@ -85,5 +101,17 @@ class UsuariosController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+
+    public function grupo_index()
+    {
+        
+        $grupos = DB::select('select * from tbl_grupos;');
+        //dd($users);
+        
+        return view('usuarios.grupos_index',array('grupos'=>$grupos));
+
     }
 }

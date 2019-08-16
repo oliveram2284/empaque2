@@ -6,9 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <title>
-    Clean UI HTML Admin Template
+    Empaque 2.0
   </title>
-  <link href="{{ URL::asset('cleanui/components/dummy-assets/common/img/favicon.png') }}" rel="shortcut icon">
+  <link href="{{ URL::asset('favicon.ico') }}" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i" rel="stylesheet">
 
   <!-- VENDORS -->

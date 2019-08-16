@@ -11,7 +11,13 @@
 |
 */
 
-Route::redirect('/', '/dashboard/alpha');
+Auth::routes();
+
+//Route::get('/home', 'HomeController@index')->name('home');
+Route::redirect('/', '/HomeController/@index')->name('base');
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/logout','HomeController@logout')->name('logout');
+
 
 /*
 |--------------------------------------------------------------------------
@@ -366,7 +372,9 @@ Route::prefix('icons')->group(function () {
 |--------------------------------------------------------------------------
 */
  
-Route::resource('usuarios','UsuariosController');
+//Route::resource('usuarios','UsuariosController');
+Route::get('/usuarios','UsuariosController@index')->name('usuarios');
+Route::get('/grupos', 'UsuariosController@grupo_index')->name('grupos');
 /*
 Route::prefix('Usuarios')->group(function () {
   Route::get('alpha', function () {
@@ -387,4 +395,6 @@ Route::prefix('Usuarios')->group(function () {
 });*/ Route::get('alpha', function () {
     return view('pages.dashboard.alpha');
   });
+
+
 
