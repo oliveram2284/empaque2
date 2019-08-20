@@ -28,12 +28,12 @@
               </a>
               <ul class="cui-menu-left-list">
                 <li class="cui-menu-left-item">
-                  <a href="{{ route('usuarios') }}">
+                  <a href="{{ route('usuarios.index') }}">
                     <span class="cui-menu-left-title">Usuarios</span>
                   </a>
                 </li>
                 <li class="cui-menu-left-item">
-                    <a href="{{ route('grupos') }}">
+                    <a href="">
                       <span class="cui-menu-left-title">Grupos</span>
                     </a>
                   </li>

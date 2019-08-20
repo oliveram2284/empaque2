@@ -55,20 +55,11 @@ class UsuariosController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request);
-
-        $usuario = new Usuarios;
-        $params=$request->all();
-        $params['creado_por']=0;
-        $params['id_tipo']=0;
-        $params['id_sector']=0;
-        $params['id_puesto']=0;
+        dd($$request->all());
         
-        //dd($params);
-        $usuario->fill($params);
 
         //dd($usuario);
-        $result= $usuario->save();
+        //$result= $usuario->save();
         return Redirect()->route('usuarios');
         //
     }
@@ -79,9 +70,27 @@ class UsuariosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
+    public function show($id){
+        
+
+        
+		
+    }
+
+
+    /**
+     * Get Ajax the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function get_ajax($id){
+        
+        $usuario = Usuarios::where('id_usuario','=',$id)->first();
+        $response=array(
+            'usuario'=>$usuario,
+        );
+        echo json_encode($response);
     }
 
     /**
@@ -102,9 +111,31 @@ class UsuariosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id,Request $request)
     {
-        //
+
+        try {
+            $usuario = Usuarios::where('id_usuario','=',$id)->first();
+        } catch (\Exception $e) {
+            return Redirect()->route('usuarios')->with('message-error', 'An error occurred while trying to process your request.');
+        }
+        if (empty($usuario)) {
+        return Redirect::back()->with('message-error', 'Usuario not found!');
+        }else{
+
+       
+        $usuario->nombre = $request->nombre;
+        $usuario->nombre_real = $request->nombre_real;
+        $usuario->id_grupo = $request->id_grupo;
+        $usuario->catId = $request->catId;
+
+        if ($request->contrasenia != $usuario->contrasenia) {
+            $usuario->contrasenia = $request->contrasenia;
+        }
+        
+        $usuario->save();
+        return Redirect()->route('usuarios')->with('message', 'Operator Two updated correctly!');
+        }
     }
 
     /**
@@ -114,8 +145,20 @@ class UsuariosController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        //
+    {        
+        try {
+            $usuario = Usuarios::where('id_usuario','=',$id);
+        } catch (\Exception $e) {
+            return Redirect()->route('usuarios')->with('message-error', 'An error occurred while trying to process your request.');
+        }
+
+        if (empty($usuario)) {
+            return Redirect()->route('usuarios')->with('message-error', 'usuario not found!');
+        }else{
+            $usuario->delete();
+            return Redirect()->route('usuarios')->with('message', 'usuario removed correctly!');
+        }
+
     }
 
 

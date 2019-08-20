@@ -319,7 +319,7 @@
             <span class="badge badge-success font-size-11 ml-2">25 New</span></a
           > -->
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="javascript:void(0)"
+          <a class="dropdown-item" href="{{ route('logout') }}"
             ><i class="dropdown-icon icmn-exit"></i> Logout</a
           >
         </div>

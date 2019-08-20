@@ -10,7 +10,7 @@
     <!-- 
       <a href="#" class="btn btn-sm btn-icon btn-primary mr-2 pull-right invisible"><i class="icmn-plus" aria-hidden="true"></i> Nuevo Usuario</a>
     -->
-      <a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#create_modal">   Nueva tarea  </a>
+      <a href="{{route('usuarios.create')}}" class="btn btn-primary pull-right" >   Nueva Usuario  </a>
   </div>
   <div class="card-body">
     <div class="row">
@@ -29,28 +29,28 @@
             </thead>
             <tbody>
                 @foreach ($usuarios as $usuario)
-                  <tr>
-                      <td class="text-center">{{$usuario->id_usuario}}</td>
-                      <td>{{$usuario->nombre}}</td>
-                      <td>{{$usuario->nombre_real}}</td>
-                      <td>{{$usuario->id_grupo}}</td>
-                      <td>{{$usuario->catId}}</td>
-                      <td class="text-center">
+                    <tr>
+                        <td class="text-center">{{$usuario->id}}</td>
+                        <td>{{$usuario->name}}</td>
+                        <td>{{$usuario->full_name}}</td>
+                        <td>{{$usuario->grupo}}</td>
+                        <td>{{(is_null($usuario->categoria)?$usuario->categoria:'')}}</td>
+                        <td class="text-center">
+                            <a class="view_pass_bt btn btn-sm btn-icon btn-primary mr-2" href="{{ route('usuarios.show',$usuario->id) }}" >
+                                <i class="icmn-eye" aria-hidden="true"></i>                            
+                            </a>
 
-                          <a class="edit_bt btn btn-sm btn-icon btn-success mr-2" data-id="{{$usuario->id_usuario}}" data-href="{{route('usuarios.update',['id'=>$usuario->id_usuario])}}"  >
-                              <i class="icmn-pencil" aria-hidden="true"></i>                            
-                          </a>
-                           
-                          <a class="view_pass_bt btn btn-sm btn-icon btn-primary mr-2" href="{{ route('blogs.show',$blog->id) }}" >
-                              <i class="icmn-key" aria-hidden="true"></i>                            
-                          </a>
+                            <a class="edit_bt btn btn-sm btn-icon btn-success mr-2" href="{{ route('usuarios.edit',$usuario->id) }}"  >
+                                <i class="icmn-pencil" aria-hidden="true"></i>                            
+                            </a>                        
+                         
 
-                          <a class="delete_bt btn btn-sm btn-icon btn-danger mr-2 " data-href="">
-                              <i class="icmn-bin" aria-hidden="true"></i>                            
-                          </a>
+                            <a class="delete_bt btn btn-sm btn-icon btn-danger mr-2 "  href="{{ route('usuarios.destroy',$usuario->id) }}">
+                                <i class="icmn-bin" aria-hidden="true"></i>                            
+                            </a>
 
-                      </td>
-                  </tr> 
+                        </td>
+                    </tr> 
                 @endforeach
                
             </tbody>
@@ -64,8 +64,7 @@
 </section>
 
 
-@include('usuarios/form');
-@include('usuarios/password');
+
 
 
 <!-- END: tables/datatables -->
@@ -81,7 +80,7 @@
         autoWidth: true,
       })
     })
-
+    /*
     $("#save_bt").on('click',function(){      
       $("#create_modal form").trigger('submit');
       return;
@@ -93,7 +92,7 @@
       
       var url_ajax="";
 
-      var url_edit ="";
+      var url_edit ="{{route('usuarios.update',['id'=>"id"])}}";
       url_ajax=url_ajax.replace('id',id);
       url_edit=url_edit.replace('id',id);
 
@@ -159,7 +158,7 @@
       });
 
       return false;
-    });
+    });*/
   })(jQuery)
 </script>
 <!-- END: page scripts -->

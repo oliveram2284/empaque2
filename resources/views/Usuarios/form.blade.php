@@ -8,7 +8,7 @@
                 <h4>Crear</h4>
             </div>
             <div class="modal-body">
-                <form method="POST" action="{{ route('usuarios.add') }}">    
+                <form method="POST" action="{{ route('usuarios.store') }}">    
                     @csrf
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label" for="l0">Usuario</label>

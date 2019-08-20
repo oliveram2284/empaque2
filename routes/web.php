@@ -11,6 +11,14 @@
 |
 */
 
+
+
+/*
+|--------------------------------------------------------------------------
+| EMPAQUE ROUTES PAGEs
+|--------------------------------------------------------------------------
+*/
+
 Auth::routes();
 
 //Route::get('/home', 'HomeController@index')->name('home');
@@ -18,6 +26,12 @@ Route::redirect('/', '/HomeController/@index')->name('base');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/logout','HomeController@logout')->name('logout');
 
+
+
+ 
+Route::resource('usuarios','UsersController');
+
+//Route::resource('usuario','UsersController');
 
 /*
 |--------------------------------------------------------------------------
@@ -365,17 +379,13 @@ Route::prefix('icons')->group(function () {
 });
 
 
-
+//Route::get('/usuarios','UsersController@index')->name('usuarios');
 /*
-|--------------------------------------------------------------------------
-| EMPAQUE ROUTES PAGEs
-|--------------------------------------------------------------------------
-*/
- 
-//Route::resource('usuarios','UsuariosController');
-Route::get('/usuarios','UsuariosController@index')->name('usuarios');
-Route::post('/usuarios_add','UsuariosController@store')->name('usuarios.add');
-Route::get('/grupos', 'UsuariosController@grupo_index')->name('grupos');
+Route::post('/usuarios/add','UsuariosController@store')->name('usuarios.add');
+Route::get('/usuarios/delete/{id}','UsuariosController@destroy')->name('usuarios.delete');
+Route::post('/usuarios/edit/{id}','UsuariosController@update')->name('usuarios.update');
+Route::get('/usuarios/get/{id}','UsuariosController@get_ajax')->name('usuarios.get');
+Route::get('/grupos', 'UsuariosController@grupo_index')->name('grupos');*/
 /*
 Route::prefix('Usuarios')->group(function () {
   Route::get('alpha', function () {
