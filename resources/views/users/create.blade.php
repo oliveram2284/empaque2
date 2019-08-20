@@ -27,7 +27,7 @@
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label" for="l0">Usuario</label>
                                 <div class="col-md-9">
-                                    <input type="text" class="form-control" placeholder="Usuario" name="name" id="l0">
+                                    <input type="text" class="form-control" placeholder="Usuario" name="username" id="l0">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -44,9 +44,9 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-md-3 col-form-label" for="l0">Grupo</label>
+                                <label class="col-md-3 col-form-label" for="group_id">Grupo</label>
                                 <div class="col-md-9">                           
-                                    <select class="form-control" id="l13" name="id_grupo">
+                                    <select class="form-control" id="group_id" name="group_id">
                                         <option value="">Seleccionar Grupo</option>
                                         @foreach ($grupos as $item)
                                             <option value="{{$item->id_grupo}}">{{$item->descripcion}}</option>

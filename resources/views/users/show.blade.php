@@ -13,7 +13,7 @@
             <div class="form-group row">
                 <label class="col-md-2 col-form-label" for="l0">Usuario</label>
                 <div class="col-md-6">
-                    {{$user->name}}
+                    {{$user->username}}
                 </div>
             </div>
             <div class="form-group row">
@@ -26,14 +26,14 @@
             <div class="form-group row">
                 <label class="col-md-2 col-form-label" for="l0">Grupo</label>
                 <div class="col-md-6">
-                    {{$user->group_id}}
+                    {{$user->grupo}}
                 </div>
             </div>
 
             <div class="form-group row">
                 <label class="col-md-2 col-form-label" for="l0">Categoria</label>
                 <div class="col-md-6">
-                    {{$user->catId}}
+                    {{$user->categoria}}
                 </div>
             </div>
 

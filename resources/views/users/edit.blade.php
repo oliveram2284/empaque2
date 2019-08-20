@@ -26,28 +26,28 @@
                             @csrf 
                             @method('PUT')
                             <div class="form-group row">
-                                <label class="col-md-3 col-form-label" for="l0">Usuario</label>
+                                <label class="col-md-3 col-form-label" for="username">Usuario</label>
                                 <div class="col-md-9">
-                                    <input type="text" class="form-control" placeholder="Usuario" name="name" id="l0" value="{{ $user->name }}">
+                                    <input type="text" class="form-control" placeholder="Usuario" name="username" id="username" value="{{ $user->username }}">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-md-3 col-form-label" for="l0">Nombre Y Apellido</label>
+                                <label class="col-md-3 col-form-label" for="full_name">Nombre Y Apellido</label>
                                 <div class="col-md-9">
-                                    <input type="text" class="form-control" placeholder="Nombre y Apellido" name="full_name" value="{{ $user->full_name }}">
+                                    <input type="text" class="form-control" placeholder="Nombre y Apellido" id="full_name" name="full_name" value="{{ $user->full_name }}">
                                 </div>
                             </div>
         
                             <div class="form-group row">
-                                <label class="col-md-3 col-form-label" for="l0">Contraseña</label>
+                                <label class="col-md-3 col-form-label" for="password">Contraseña</label>
                                 <div class="col-md-9">
-                                    <input type="password" class="form-control" placeholder="Contraseña" name="password" id="l0" value="">
+                                    <input type="password" class="form-control" placeholder="Contraseña" name="password" id="password" value="">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-md-3 col-form-label" for="l0">Grupo</label>
+                                <label class="col-md-3 col-form-label" for="group_id">Grupo</label>
                                 <div class="col-md-9">                           
-                                    <select class="form-control" id="l13" name="group_id">
+                                    <select class="form-control" id="group_id" name="group_id">
                                         <option value="">Seleccionar Grupo</option>
                                         @foreach ($grupos as $item)
                                             <option value="{{$item->id_grupo}}" {{ ($user->group_id==$item->id_grupo)?'selected':'' }}  >{{$item->descripcion}}</option>
@@ -56,9 +56,9 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-md-3 col-form-label" for="l0" >Categoría</label>
+                                <label class="col-md-3 col-form-label" for="catId" >Categoría</label>
                                 <div class="col-md-9">
-                                    <select class="form-control" id="l14" name="catId">
+                                    <select class="form-control" id="catId" name="catId">
                                         <option value="">Seleccionar Categoria</option>
                                         @foreach ($categorias as $item)
                                             <option value="{{$item->id}}" {{ ($user->catId==$item->id)?'selected':'' }} >{{$item->codigo}}</option>

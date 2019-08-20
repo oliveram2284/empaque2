@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use Illuminate\Http\Response;
 
+use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Input;
 
@@ -26,7 +28,7 @@ class UsersController extends Controller
         $users= DB::table('users')
                 ->leftJoin('tbl_grupos','users.group_id','=','tbl_grupos.id_grupo')
                 ->leftJoin('categoria_usuarios','users.catId','=','categoria_usuarios.id')
-                ->select('users.*', 'categoria_usuarios.descripcion as categoria ', 'tbl_grupos.descripcion as grupo')
+                ->select('users.*', 'categoria_usuarios.descripcion as categoria', 'tbl_grupos.descripcion as grupo')
                 ->get();        
         //dd($users);
         $params=array(
@@ -45,6 +47,7 @@ class UsersController extends Controller
     {
         $grupos = DB::select('select * from tbl_grupos;');
         $categorias = DB::select('select * from categoria_usuarios;');
+       
         $params=array(
            
             'grupos'     => $grupos,
@@ -63,12 +66,15 @@ class UsersController extends Controller
     {   
 
         $request->validate([
-            'name' => 'required',
+            'username' => 'required',
             'password' => 'required',
-            'id_grupo' => 'required',
+            'group_id' => 'required',
         ]);
-        
 
+        $params=$request->all();
+       
+        $params['password']=Hash::make($params['password']);
+       
         User::create($request->all());
         return redirect()->route('usuarios.index')->with('success','Usuario Creado.');       
     }
@@ -81,7 +87,14 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        $user=User::find($id);
+        //$user=User::find($id);
+        $user= DB::table('users')
+                ->leftJoin('tbl_grupos','users.group_id','=','tbl_grupos.id_grupo')
+                ->leftJoin('categoria_usuarios','users.catId','=','categoria_usuarios.id')
+                ->select('users.*', 'categoria_usuarios.descripcion as categoria', 'tbl_grupos.descripcion as grupo')
+                ->where('users.id',$id)
+                ->get()->first();
+       // dd($user);        
         return view('users.show',compact('user'));
     }
 
