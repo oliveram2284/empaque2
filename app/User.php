@@ -36,4 +36,23 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    /** 
+     * RELACION CON TABLE GRUPO
+    */
+
+    public function grupo()
+    {
+        return $this->hasOne('App\Grupo','id_grupo','group_id');
+    }
+
+    /** 
+     * RELACION CON TABLE CATEGORIA
+    */
+
+    public function categoria()
+    {
+        return $this->hasOne('App\CategoriaUsuario','id','catId');
+    }
 }

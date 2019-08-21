@@ -33,8 +33,8 @@
                         <td class="text-center">{{$usuario->id}}</td>
                         <td>{{$usuario->username}}</td>
                         <td>{{$usuario->full_name}}</td>
-                        <td>{{$usuario->grupo}}</td>
-                        <td>{{(!is_null($usuario->categoria)?$usuario->categoria:'')}}</td>
+                        <td>{{$usuario->grupo->descripcion}}</td>
+                        <td>{{(!is_null($usuario->categoria)?$usuario->categoria->descripcion:'')}}</td>
                         <td class="text-center">
                             <a class="view_pass_bt btn btn-sm btn-icon btn-primary mr-2" href="{{ route('usuarios.show',$usuario->id) }}" >
                                 <i class="icmn-eye" aria-hidden="true"></i>                            

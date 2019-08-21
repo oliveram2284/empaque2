@@ -22,7 +22,8 @@
 Auth::routes();
 
 //Route::get('/home', 'HomeController@index')->name('home');
-Route::redirect('/', '/HomeController/@index')->name('base');
+//Route::redirect('/', 'HomeController@index')->name('base');
+Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/logout','HomeController@logout')->name('logout');
 

@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\DB;
 
 use App\User;
+use App\Grupo;
+use App\CategoriaUsuario;
 class UsersController extends Controller
 {
     /**
@@ -25,12 +27,13 @@ class UsersController extends Controller
         //
         //$users= User::select("select u.*,(SELECT description FROM tbl_grupos as g WHERE u.group_id=g.id_grupo) as grupo from users as u;");
         //$users= User::join('tbl_grupos','users.group_id','=','tbl_grupos.id_grupo');
-        $users= DB::table('users')
+        /*$users= DB::table('users')
                 ->leftJoin('tbl_grupos','users.group_id','=','tbl_grupos.id_grupo')
                 ->leftJoin('categoria_usuarios','users.catId','=','categoria_usuarios.id')
                 ->select('users.*', 'categoria_usuarios.descripcion as categoria', 'tbl_grupos.descripcion as grupo')
-                ->get();        
+                ->get();*/        
         //dd($users);
+        $users=User::all();
         $params=array(
             'usuarios'   => $users,
         );
@@ -45,11 +48,11 @@ class UsersController extends Controller
      */
     public function create()
     {
-        $grupos = DB::select('select * from tbl_grupos;');
-        $categorias = DB::select('select * from categoria_usuarios;');
-       
-        $params=array(
-           
+        
+        $grupos=Grupo::all();
+        $categorias=CategoriaUsuario::all();
+
+        $params=array(           
             'grupos'     => $grupos,
             'categorias' => $categorias,
         );
@@ -107,9 +110,10 @@ class UsersController extends Controller
     public function edit($id)
     {
         $user=User::find($id);
-       
-        $grupos = DB::select('select * from tbl_grupos;');
-        $categorias = DB::select('select * from categoria_usuarios;');
+        
+        $grupos=Grupo::all();
+        $categorias=CategoriaUsuario::all();
+
         $params=compact('user');
         $params['grupos']=$grupos;
         $params['categorias']=$categorias;
