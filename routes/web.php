@@ -31,6 +31,7 @@ Route::get('/logout','HomeController@logout')->name('logout');
 
  
 Route::resource('usuarios','UsersController');
+Route::resource('areas','AreaController');
 
 //Route::resource('usuario','UsersController');
 
