@@ -74,11 +74,10 @@ class UsersController extends Controller
             'group_id' => 'required',
         ]);
 
-        $params=$request->all();
-       
-        $params['password']=Hash::make($params['password']);
-       
-        User::create($request->all());
+        $params=$request->all();       
+        $params['password']=Hash::make($params['password']);       
+        User::create($params);
+        
         return redirect()->route('usuarios.index')->with('success','Usuario Creado.');       
     }
 
@@ -136,6 +135,8 @@ class UsersController extends Controller
         $params = $request->all();
         if(is_null($params['password']) ){
             unset($params['password']);
+        }else{
+            $params['password']=Hash::make($params['password']);    
         }
         
         $user->update($params);
