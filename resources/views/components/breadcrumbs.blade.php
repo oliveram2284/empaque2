@@ -1,4 +1,4 @@
-<nav class="cui-breadcrumbs cui-breadcrumbs-bg">
+<!-- <nav class="cui-breadcrumbs cui-breadcrumbs-bg">
   <div class="pull-right invisible">
     <a href="javascript: void(0);" class="btn btn-sm btn-primary">
       Update
@@ -9,5 +9,7 @@
     <span class="text-muted">Inicio ·</span>
     <strong>Usuarios</strong>
     <small class="text-muted invisible">statistics, charts, recent events and reports</small>
-  </span>
+  </span> 
 </nav>
+
+-->
