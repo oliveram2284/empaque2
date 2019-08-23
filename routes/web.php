@@ -31,6 +31,8 @@ Route::get('/logout','HomeController@logout')->name('logout');
 
  
 Route::resource('usuarios','UsersController');
+
+Route::get('/importar', 'UsersController@import');
 Route::resource('areas','AreaController');
 
 //Route::resource('usuario','UsersController');

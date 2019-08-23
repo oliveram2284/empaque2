@@ -153,4 +153,28 @@ class UsersController extends Controller
     {
         //
     }
+
+    public function import(){
+        $users_old=DB::table('usuarios')->get();// DB::all('SELECT * FROM ;');
+        foreach ($users_old as $key => $user) {
+            # code...
+            var_dump($user);
+            $new_user=new User();
+
+            $new_user->username=$user->nombre;
+            $new_user->full_name=$user->nombre_real;
+            $new_user->password=Hash::make($user->contrasenia) ;
+            $new_user->id_tipo=0;
+            $new_user->id_sector=0;
+            $new_user->id_puesto=0;
+            $new_user->group_id=$user->id_grupo;
+            $new_user->catId=$user->catId;
+            //$new_user->grpId=0;
+            $new_user->enable=1;
+
+            var_dump($new_user);
+            $new_user->save();
+        }
+        //return true;
+    }
 }
