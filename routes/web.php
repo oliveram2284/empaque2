@@ -34,6 +34,8 @@ Route::resource('usuarios','UsersController');
 
 Route::get('/importar', 'UsersController@import');
 Route::resource('areas','AreaController');
+Route::resource('componentes_laminados','ComponeteLaminadoController');
+Route::resource('categorias','CategoriaController');
 
 //Route::resource('usuario','UsersController');
 
@@ -42,7 +44,7 @@ Route::resource('areas','AreaController');
 | Dashboard Pages
 |--------------------------------------------------------------------------
 */
- 
+/* 
 Route::prefix('dashboard')->group(function () {
   Route::get('alpha', function () {
     return view('pages.dashboard.alpha');
@@ -59,14 +61,14 @@ Route::prefix('dashboard')->group(function () {
   Route::get('docs', function () {
     return view('pages.dashboard.docs');
   });
-});
+});*/
 
 /*
 |--------------------------------------------------------------------------
 | Default Pages
 |--------------------------------------------------------------------------
 */
- 
+/* 
 Route::prefix('pages')->group(function () {
   Route::get('login-alpha', function () {
     return view('pages.pages.login-alpha');
@@ -93,13 +95,13 @@ Route::prefix('pages')->group(function () {
     return view('pages.pages.page-500');
   });
 });
-
+*/
 /*
 |--------------------------------------------------------------------------
 | Ecommerce Pages
 |--------------------------------------------------------------------------
 */
- 
+/* 
 Route::prefix('ecommerce')->group(function () {
   Route::get('dashboard', function () {
     return view('pages.ecommerce.dashboard');
@@ -123,13 +125,13 @@ Route::prefix('ecommerce')->group(function () {
     return view('pages.ecommerce.cart-checkout');
   });
 });
-
+*/
 /*
 |--------------------------------------------------------------------------
 | Forms Pages
 |--------------------------------------------------------------------------
 */
- 
+/* 
 Route::prefix('forms')->group(function () {
   Route::get('basic-form-elements', function () {
     return view('pages.forms.basic-form-elements');
@@ -165,13 +167,13 @@ Route::prefix('forms')->group(function () {
     return view('pages.forms.extras');
   });
 });
-
+*/
 /*
 |--------------------------------------------------------------------------
 | Components Pages
 |--------------------------------------------------------------------------
 */
- 
+/* 
 Route::prefix('components')->group(function () {
   Route::get('date-picker', function () {
     return view('pages.components.date-picker');
@@ -228,13 +230,13 @@ Route::prefix('components')->group(function () {
     return view('pages.components.mail-templates');
   });
 });
-
+*/
 /*
 |--------------------------------------------------------------------------
 | Tables Pages
 |--------------------------------------------------------------------------
 */
- 
+/* 
 Route::prefix('tables')->group(function () {
   Route::get('basic-tables', function () {
     return view('pages.tables.basic-tables');
@@ -246,13 +248,13 @@ Route::prefix('tables')->group(function () {
     return view('pages.tables.editable-tables');
   });
 });
-
+*/
 /*
 |--------------------------------------------------------------------------
 | Charts Pages
 |--------------------------------------------------------------------------
 */
- 
+/* 
 Route::prefix('charts')->group(function () {
   Route::get('chartistjs', function () {
     return view('pages.charts.chartistjs');
@@ -267,13 +269,13 @@ Route::prefix('charts')->group(function () {
     return view('pages.charts.peity');
   });
 });
-
+*/
 /*
 |--------------------------------------------------------------------------
 | Apps Pages
 |--------------------------------------------------------------------------
 */
- 
+/* 
 Route::prefix('apps')->group(function () {
   Route::get('profile', function () {
     return view('pages.apps.profile');
@@ -291,13 +293,13 @@ Route::prefix('apps')->group(function () {
     return view('pages.apps.gallery');
   });
 });
-
+*/
 /*
 |--------------------------------------------------------------------------
 | Github Pages
 |--------------------------------------------------------------------------
 */
- 
+/* 
 Route::prefix('github')->group(function () {
   Route::get('explore', function () {
     return view('pages.github.explore');
@@ -306,13 +308,13 @@ Route::prefix('github')->group(function () {
     return view('pages.github.discuss');
   });
 });
-
+*/
 /*
 |--------------------------------------------------------------------------
 | Youtube Pages
 |--------------------------------------------------------------------------
 */
- 
+/* 
 Route::prefix('youtube')->group(function () {
   Route::get('feed', function () {
     return view('pages.youtube.feed');
@@ -321,13 +323,13 @@ Route::prefix('youtube')->group(function () {
     return view('pages.youtube.view');
   });
 });
-
+*/
 /*
 |--------------------------------------------------------------------------
 | Blog Pages
 |--------------------------------------------------------------------------
 */
- 
+/* 
 Route::prefix('blog')->group(function () {
   Route::get('add-post', function () {
     return view('pages.blog.add-post');
@@ -339,13 +341,13 @@ Route::prefix('blog')->group(function () {
     return view('pages.blog.feed');
   });
 });
-
+*/
 /*
 |--------------------------------------------------------------------------
 | Layout Pages
 |--------------------------------------------------------------------------
 */
- 
+/* 
 Route::prefix('layout')->group(function () {
   Route::get('grid', function () {
     return view('pages.layout.grid');
@@ -363,13 +365,14 @@ Route::prefix('layout')->group(function () {
     return view('pages.layout.typography');
   });
 });
-
+*/
 /*
 |--------------------------------------------------------------------------
 | Icons Pages
 |--------------------------------------------------------------------------
 */
  
+/*
 Route::prefix('icons')->group(function () {
   Route::get('fontawesome', function () {
     return view('pages.icons.fontawesome');
@@ -382,7 +385,7 @@ Route::prefix('icons')->group(function () {
   });
 });
 
-
+*/
 //Route::get('/usuarios','UsersController@index')->name('usuarios');
 /*
 Route::post('/usuarios/add','UsuariosController@store')->name('usuarios.add');

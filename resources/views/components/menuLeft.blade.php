@@ -48,14 +48,19 @@
           <ul class="cui-menu-left-list">
             <li class="cui-menu-left-item">
               <a href="{{ route('areas.index') }}">
-                <span class="cui-menu-left-title">Areas</span>
+                <span class="cui-menu-left-title">Áreas</span>
               </a>
             </li>
-            <li class="cui-menu-left-item invisible">
-                <a href="">
-                  <span class="cui-menu-left-title">Grupos</span>
-                </a>
-              </li>                 
+            <li class="cui-menu-left-item ">
+              <a href="{{ route('componentes_laminados.index') }} ">
+                <span class="cui-menu-left-title">Componentes Laminados</span>
+              </a>
+            </li>  
+            <li class="cui-menu-left-item ">
+              <a href="{{ route('categorias.index') }} ">
+                <span class="cui-menu-left-title">Categías</span>
+              </a>
+            </li>                 
           </ul>
         </li> 
 
