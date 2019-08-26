@@ -60,6 +60,11 @@
               <a href="{{ route('categorias.index') }} ">
                 <span class="cui-menu-left-title">Categías</span>
               </a>
+            </li> 
+            <li class="cui-menu-left-item ">
+              <a href="{{ route('depositos.index') }} ">
+                <span class="cui-menu-left-title">Depositos</span>
+              </a>
             </li>                 
           </ul>
         </li> 

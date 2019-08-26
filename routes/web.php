@@ -36,6 +36,7 @@ Route::get('/importar', 'UsersController@import');
 Route::resource('areas','AreaController');
 Route::resource('componentes_laminados','ComponeteLaminadoController');
 Route::resource('categorias','CategoriaController');
+Route::resource('depositos','DepositoController');
 
 //Route::resource('usuario','UsersController');
 
