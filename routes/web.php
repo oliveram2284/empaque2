@@ -35,8 +35,11 @@ Route::resource('usuarios','UsersController');
 Route::get('/importar', 'UsersController@import');
 Route::resource('areas','AreaController');
 Route::resource('componentes_laminados','ComponeteLaminadoController');
+Route::get('/componentes_laminados/delete/{id}', 'ComponeteLaminadoController@destroy')->name('componentes_laminados.delete');
+
 Route::resource('categorias','CategoriaController');
 Route::resource('depositos','DepositoController');
+Route::resource('empresas','EmpresasController');
 
 //Route::resource('usuario','UsersController');
 

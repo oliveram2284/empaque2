@@ -15,7 +15,8 @@ class ComponeteLaminadoController extends Controller
     {
         //
         $componentes_laminados= ComponenteLaminado::get();
-        return $componentes_laminados;
+        return view('componente_laminado.index',compact('componentes_laminados'));
+
     }
 
     /**
@@ -25,7 +26,7 @@ class ComponeteLaminadoController extends Controller
      */
     public function create()
     {
-        //
+        return view('componente_laminado.create');
     }
 
     /**
@@ -37,6 +38,16 @@ class ComponeteLaminadoController extends Controller
     public function store(Request $request)
     {
         //
+
+        $request->validate([
+            'descripcion' => 'required',
+        ]);
+
+        $params=$request->all(); 
+      
+        unset($params['_token']);
+        ComponenteLaminado::create($params);
+        return redirect()->route('componentes_laminados.index')->with('success','Componente Laminado Creado.');   
     }
 
     /**
@@ -59,6 +70,8 @@ class ComponeteLaminadoController extends Controller
     public function edit($id)
     {
         //
+        $compLaminado=ComponenteLaminado::find($id);
+        return view('componente_laminado.edit',compact('compLaminado'));
     }
 
     /**
@@ -71,6 +84,11 @@ class ComponeteLaminadoController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $componente_laminado=ComponenteLaminado::find($id);
+        $params = $request->all();        
+        
+        $componente_laminado->update($params);
+        return redirect()->route('componentes_laminados.index')->with('success','Componente Laminado Actualizado.');   
     }
 
     /**
@@ -81,6 +99,7 @@ class ComponeteLaminadoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $res=ComponenteLaminado::find($id)->delete();
+        return redirect()->route('componentes_laminados.index')->with('success','Componente Laminado Eliminado.'); 
     }
 }

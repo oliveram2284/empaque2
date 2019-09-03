@@ -65,7 +65,12 @@
               <a href="{{ route('depositos.index') }} ">
                 <span class="cui-menu-left-title">Depositos</span>
               </a>
-            </li>                 
+            </li>
+            <li class="cui-menu-left-item ">
+              <a href="{{ route('empresas.index') }} ">
+                <span class="cui-menu-left-title">Empresas</span>
+              </a>
+            </li>                     
           </ul>
         </li> 
 

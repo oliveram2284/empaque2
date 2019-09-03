@@ -4,10 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ComponenteLaminado extends Model
+class Empresas extends Model
 {
-    protected $table ='componenteslaminado';
-    protected $primaryKey = 'idComponente';
+    //
+
+    protected $table ='empresas';
+    protected $primaryKey = 'id_empresa';
     public $timestamps = false;
 
     protected $fillable = [
