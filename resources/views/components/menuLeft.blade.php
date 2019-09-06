@@ -75,8 +75,7 @@
         </li> 
 
 
-
-
+        {{--
         <li class="cui-menu-left-item">
           <a href="javascript: void(0);" class="cui-menu-right-action-toggle">
             <span class="cui-menu-left-icon icmn-cog"></span>
@@ -126,6 +125,7 @@
             <span class="ml-2 badge badge-primary">PRO</span>
           </a>
         </li>
+      
         <li class="cui-menu-left-divider">
           <!-- -->
         </li>
@@ -810,7 +810,8 @@
               >Buy Pro 21$</a
             >
           </div>
-        </li>
+        </li> 
+        --}}
       </ul>
     </div>
   </div>
