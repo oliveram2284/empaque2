@@ -5,7 +5,7 @@
 <div class="row">
   <div class="col-lg-12">
     <div class="cui-utils-title mb-3">
-      <strong class="text-uppercase font-size-16">Last Week Statistics</strong>
+      <strong class="text-uppercase font-size-16">PANEL DE INICIO</strong>
     </div>
     <div class="row">
       <div class="col-xl-4">
@@ -43,10 +43,10 @@
     <div class="card">
       <div class="card-header">
         <div class="cui-utils-title">
-          <strong>Recently Referrals</strong>
+          <strong>Ultimos Pedidos Ingresados</strong>
         </div>
         <div class="cui-utils-title-description">
-          Block with important Recently Referrals information
+          
         </div>
       </div>
       <div class="card-body">
@@ -92,6 +92,7 @@
     </div>
   </div>
 </div>
+{{-- 
 <div class="row">
   <div class="col-lg-12">
     <div class="cui-utils-title mb-3">
@@ -139,7 +140,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> 
 <div class="row">
   <div class="col-lg-12">
     <div class="cui-utils-title mb-3">
@@ -192,13 +193,15 @@
     </div>
   </div>
 </div>
+
+--}}
 <div class="row">
   <div class="col-lg-12">
     <div class="cui-utils-title mb-3">
       <span class="text-uppercase font-size-16">
-        <strong>recent transactions (167)</strong>
+        <strong>Ultimos Pedidos Actualizados</strong>
       </span>
-      <button class="ml-3 btn btn-outline-default btn-sm">View All</button>
+      <button class="ml-3 btn btn-outline-default btn-sm">Ver Todos</button>
     </div>
     <div class="row">
       <div class="col-lg-12">
@@ -207,10 +210,10 @@
             <i class="lnr lnr-arrow-right"></i>
           </div>
           <div>
-            <span class="cui-payment-transaction-amount">-$100.00</span>
-            <sup class="cui-payment-transaction-info">US 4658-1678-7528</sup>
+            <span class="cui-payment-transaction-amount">G2-2503-18</span>
+            <sup class="cui-payment-transaction-info">DEPOSITO MENDOZA - REMITOS</sup>
           </div>
-          <div class="cui-payment-transaction-footer">To AMAZON COPR, NY, 1756</div>
+          <div class="cui-payment-transaction-footer">SER AGRO R/CTAL 37.63.60 (7) C/TRAMA C/RENSPA PRODUCCION ARGENTINA SIN ORIGEN 1 PISTA TNACH</div>
         </a>
       </div>
       <div class="col-lg-12">
@@ -222,11 +225,11 @@
             <i class="lnr lnr-arrow-left"></i>
           </div>
           <div>
-            <span class="cui-payment-transaction-amount">+27,080.00</span>
-            <sup class="cui-payment-transaction-info">4512-XXXX-1678-7528</sup>
+            <span class="cui-payment-transaction-amount">G2-2504-18</span>
+            <sup class="cui-payment-transaction-info">DEPOSITO MENDOZA - REMITOS</sup>
           </div>
           <div class="cui-payment-transaction-footer">
-            To DigitalOcean Cloud Hosting, Winnetka, LA
+            EL PEPE LUIS ZAN R/CTAL x 10 KG 66.38.58 C/RENSPA SIN ORIGEN TR5GR
           </div>
         </a>
       </div>
@@ -239,15 +242,15 @@
             <i class="lnr lnr-arrow-left"></i>
           </div>
           <div>
-            <span class="cui-payment-transaction-amount">+100,000.00</span>
-            <sup class="cui-payment-transaction-info">6245-XXXX-1678-3256</sup>
+            <span class="cui-payment-transaction-amount">G2-2505-18</span>
+            <sup class="cui-payment-transaction-info">DEPOSITO MENDOZA - REMITOS</sup>
           </div>
-          <div class="cui-payment-transaction-footer">To Tesla Cars, LA, USA</div>
+          <div class="cui-payment-transaction-footer">SUPERZAN ZAN. 66.38.58 R/CTAL 2º DISEÑO C/RENSPA (CN) ORIGEN MENDOZA TNAGR</div>
         </a>
       </div>
     </div>
     <div class="text-center pb-5">
-      <button class="btn disabled btn-primary width-200">Load More...</button>
+      <button class="btn disabled btn-primary width-200">Ver Más...</button>
     </div>
   </div>
 </div>
