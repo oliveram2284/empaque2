@@ -10,4 +10,9 @@ class Categoria extends Model
     protected $table ='categorias';
     protected $primaryKey = 'id_categoria';
     public $timestamps = false;
+
+
+    protected $fillable = [
+        'codigo','nombre','factor'
+    ];
 }
