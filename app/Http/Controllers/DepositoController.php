@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Deposito;
+use App\User;
 use Illuminate\Http\Request;
 
 class DepositoController extends Controller
@@ -16,7 +17,8 @@ class DepositoController extends Controller
     {
         //
         $depositos=Deposito::get();
-        return $depositos;
+        
+        return view('depositos.index',compact('depositos'));
     }
 
     /**
@@ -27,6 +29,9 @@ class DepositoController extends Controller
     public function create()
     {
         //
+        $vendedores = User::orderBy('username', 'ASC')->get();
+        
+        return view('depositos.create',compact('vendedores'));
     }
 
     /**
@@ -38,6 +43,20 @@ class DepositoController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'codigo' => 'required',
+            'nombre' => 'required',
+            'id_vendedor' => 'required',
+        ]);
+
+        $params=$request->all(); 
+        if(!isset($params['observacion'])){
+            $params['observacion']='';
+        }
+        unset($params['_token']);
+        Deposito::create($params);
+        return redirect()->route('depositos.index')->with('success','Deposito Creado.');   
+    
     }
 
     /**
@@ -60,6 +79,8 @@ class DepositoController extends Controller
     public function edit(Deposito $deposito)
     {
         //
+        $vendedores = User::orderBy('username', 'ASC')->get();
+        return view('depositos.edit',compact('deposito','vendedores'));
     }
 
     /**
@@ -72,6 +93,17 @@ class DepositoController extends Controller
     public function update(Request $request, Deposito $deposito)
     {
         //
+
+        $params = $request->all();  
+
+        if(!isset($params['observacion'])){
+            $params['observacion']='';
+        }   
+        
+        $deposito->update($params);
+
+        return redirect()->route('depositos.index')->with('success','Deposito Actualizado.');   
+    
     }
 
     /**
