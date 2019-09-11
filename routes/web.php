@@ -41,6 +41,15 @@ Route::resource('categorias','CategoriaController');
 Route::resource('depositos','DepositoController');
 Route::resource('empresas','EmpresasController');
 
+
+Route::get('pedidos/nuevo','PedidosController@create')->name('pedidos.nuevo');  
+Route::get('pedidos/emitidos','PedidosController@emitidos')->name('pedidos.emitidos');  
+
+/*Route::group(['namespace' => 'Pedidos'], function() {
+  Route::get('pedidos/emitidos','PedidosController@emitidos')->name('pedidos.emitidos');  
+});*/
+
+
 //Route::resource('usuario','UsersController');
 
 /*
@@ -135,7 +144,7 @@ Route::prefix('ecommerce')->group(function () {
 | Forms Pages
 |--------------------------------------------------------------------------
 */
-/* 
+
 Route::prefix('forms')->group(function () {
   Route::get('basic-form-elements', function () {
     return view('pages.forms.basic-form-elements');
@@ -171,13 +180,13 @@ Route::prefix('forms')->group(function () {
     return view('pages.forms.extras');
   });
 });
-*/
+
 /*
 |--------------------------------------------------------------------------
 | Components Pages
 |--------------------------------------------------------------------------
 */
-/* 
+
 Route::prefix('components')->group(function () {
   Route::get('date-picker', function () {
     return view('pages.components.date-picker');
@@ -234,7 +243,7 @@ Route::prefix('components')->group(function () {
     return view('pages.components.mail-templates');
   });
 });
-*/
+
 /*
 |--------------------------------------------------------------------------
 | Tables Pages
@@ -376,7 +385,7 @@ Route::prefix('layout')->group(function () {
 |--------------------------------------------------------------------------
 */
  
-/*
+
 Route::prefix('icons')->group(function () {
   Route::get('fontawesome', function () {
     return view('pages.icons.fontawesome');
@@ -389,7 +398,6 @@ Route::prefix('icons')->group(function () {
   });
 });
 
-*/
 //Route::get('/usuarios','UsersController@index')->name('usuarios');
 /*
 Route::post('/usuarios/add','UsuariosController@store')->name('usuarios.add');

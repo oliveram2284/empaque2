@@ -24,21 +24,28 @@
         <li class="cui-menu-left-item cui-menu-left-submenu">
           <a href="javascript: void(0);">
             <span class="cui-menu-left-icon icmn-file-text"></span>
-            <span class="cui-menu-left-title">Seguridad</span>
+            <span class="cui-menu-left-title">Pedidos</span>
           </a>
           <ul class="cui-menu-left-list">
             <li class="cui-menu-left-item">
-              <a href="{{ route('usuarios.index') }}">
-                <span class="cui-menu-left-title">Usuarios</span>
+              <a href="{{route('pedidos.emitidos')}}">
+                <span class="cui-menu-left-title">Emitidos</span>
+              </a>
+            </li>
+            {{-- 
+            <li class="cui-menu-left-item">
+              <a href="/pages/login-beta">
+                <span class="cui-menu-left-title">Recibidos</span>
               </a>
             </li>
             <li class="cui-menu-left-item">
-                <a href="">
-                  <span class="cui-menu-left-title">Grupos</span>
-                </a>
-              </li>                 
+              <a href="/pages/register">
+                <span class="cui-menu-left-title">Producción</span>
+              </a>
+            </li>
+            --}}
           </ul>
-        </li> 
+        </li>  
 
         <li class="cui-menu-left-item cui-menu-left-submenu">
           <a href="javascript: void(0);">
@@ -79,6 +86,24 @@
           </ul>
         </li> 
 
+        <li class="cui-menu-left-item cui-menu-left-submenu">
+          <a href="javascript: void(0);">
+            <span class="cui-menu-left-icon icmn-file-text"></span>
+            <span class="cui-menu-left-title">Seguridad</span>
+          </a>
+          <ul class="cui-menu-left-list">
+            <li class="cui-menu-left-item">
+              <a href="{{ route('usuarios.index') }}">
+                <span class="cui-menu-left-title">Usuarios</span>
+              </a>
+            </li>
+            <li class="cui-menu-left-item">
+                <a href="">
+                  <span class="cui-menu-left-title">Grupos</span>
+                </a>
+              </li>                 
+          </ul>
+        </li> 
 
         {{--
         <li class="cui-menu-left-item">
