@@ -34,31 +34,46 @@
                              
                             @foreach ($pedidos as $item)
                             
-                                <tr>
-                                    <td class="text-center"><a href="#">{{$item->codigo}}</a></td>
-                                    <td><a href="#"> {{$item->clienteNombre}} </a></td>
-                                    <td>{{$item->descripcion}}</td>
-                                    <td>{{$item->femis}}</td>
-                                    <td class="text-center">  
-                                        <a class="view_pass_bt btn btn-sm btn-rounded btn-icon btn-success mr-2" href="{{ route('pedidos.emitidos') }}" >
-                                            <i class="icmn-plus" aria-hidden="true"></i>                            
-                                        </a>
-                                    </td>
-                                    <td class="text-center"> 
+                              <tr>
+                                  <td class="text-center">
+                                      <?php if($item->poliNumero!='' ):?>
+                                      <a class="view_pass_bt btn btn-sm btn-rounded btn-icon btn-danger" href="#" >
+                                        N                            
+                                      </a>
+                                    <?php endif;?>
+
+                                    <a href="#">{{$item->codigo}}</a>
+                                  </td>
+                                  <td>
+                                     
+                                    <a href="#"> {{$item->clienteNombre}} </a>
+                                  </td>
+                                  <td>{{$item->descripcion}}</td>
+                                  <td>{{$item->femis}}</td>
+                                  <td class="text-center">  
+                                    <?php if($item->estado=='I' ):?>
+                                      <a class="view_pass_bt btn btn-sm btn-rounded btn-icon btn-success mr-2" href="{{ route('pedidos.emitidos') }}" >
+                                          <i class="icmn-plus" aria-hidden="true"></i>                            
+                                      </a>
+                                    <?php endif;?>
+                                  </td>
+                                  <td class="text-center"> 
+                                      <?php if($item->estado=='I' ):?>
                                         <a class="view_pass_bt btn btn-sm btn-rounded btn-icon btn-danger mr-2" href="{{ route('pedidos.emitidos') }}" >
-                                            <i class="icmn-backward" aria-hidden="true"></i>                            
+                                            <i class="icmn-loop" aria-hidden="true"></i>                            
                                         </a>
-                                    </td>
-                                    <td class="text-center"> 
-                                        <a class="delete_bt btn btn-icon btn-link icmn-cross mr-2 mb-2"  href="{{ route('pedidos.emitidos') }}">
-                                                                      
-                                        </a>
-                                    </td>
-                                    <td> 
-                                        <a class="view_pass_bt btn btn-icon btn-link icmn-file-text2 mr-2 mb-2" href="{{ route('pedidos.emitidos') }}" >
+                                      <?php endif;?>
+                                  </td>
+                                  <td class="text-center"> 
+                                      <a class="delete_bt btn btn-icon btn-link icmn-cross mr-2 mb-2"  href="{{ route('pedidos.emitidos') }}">
                                                                     
-                                            </a>
-                                    </td>
+                                      </a>
+                                  </td>
+                                  <td> 
+                                      <a class="view_pass_bt btn btn-icon btn-link icmn-file-text2 mr-2 mb-2" href="{{ route('pedidos.emitidos') }}" >
+                                                                  
+                                      </a>
+                                  </td>
                                     
                                 </tr> 
                             @endforeach
