@@ -52,7 +52,7 @@
                             </a>                        
                          
 
-                            <a class="delete_bt btn btn-sm btn-icon btn-danger mr-2 "  href="{{ route('depositos.destroy',$item) }}">
+                            <a class="delete_bt btn btn-sm btn-icon btn-danger mr-2 "  href="#"  data-id="{{$item->id_deposito}}">
                                 <i class="icmn-bin" aria-hidden="true"></i>                            
                             </a>
 
@@ -85,7 +85,24 @@
       $('#table_data').DataTable({
         responsive: true,
         autoWidth: true,
-      })
+      });
+
+      $(".delete_bt").on('click',function(){
+        var id=$(this).data('id');
+        console.log("===> id: %o",id);
+        var url="{{route('componentes_laminados.delete',1)}}";
+        url= url.replace('1',id);
+        console.log("===> url: %o",url);
+       
+        $.ajax({
+          url: url,
+          type: 'DELETE',  // user.destroy
+          success: function(result) {
+            location="{{route('componentes_laminados.index')}}"
+              // Do something with the result
+          }
+      });
+      });
     })
     /*
     $("#save_bt").on('click',function(){      

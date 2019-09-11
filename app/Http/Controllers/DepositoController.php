@@ -99,7 +99,7 @@ class DepositoController extends Controller
         if(!isset($params['observacion'])){
             $params['observacion']='';
         }   
-        
+
         $deposito->update($params);
 
         return redirect()->route('depositos.index')->with('success','Deposito Actualizado.');   
@@ -114,6 +114,8 @@ class DepositoController extends Controller
      */
     public function destroy(Deposito $deposito)
     {
-        //
+        $res=deposito::delete();
+        return redirect()->route('depositos.index')->with('success','Deposito Eliminado.'); 
+    
     }
 }
