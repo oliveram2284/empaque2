@@ -22,12 +22,13 @@
                                 </ul>
                             </div>
                         @endif
-                        <form method="POST" action="{{ route('empresas.store') }}">    
+                        <form method="POST" action="{{ route('empresas.update',$empresa) }}">    
                             @csrf
+                            @method('PUT')
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label" for="descripcion">Descripción</label>
                                 <div class="col-md-9">
-                                    <input type="text" class="form-control" placeholder="Descripcion" name="descripcion" id="descripcion">
+                                    <input type="text" class="form-control" placeholder="Descripcion" name="descripcion" id="descripcion" value="{{$empresa->descripcion}}">
                                 </div>
                             </div>
                                                         

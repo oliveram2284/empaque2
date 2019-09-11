@@ -15,11 +15,8 @@ class EmpresasController extends Controller
     public function index()
     {
          //
-         $empresas= Empresas::get();
-         //return $componentes_laminados;
-         //dd($componentes_laminados);
-         //var_dump(compact('componentes_laminados'));
-         return view('empresas.index',compact('empresas'));
+        $empresas= Empresas::get();
+        return view('empresas.index',compact('empresas'));
     }
 
     /**
@@ -30,6 +27,7 @@ class EmpresasController extends Controller
     public function create()
     {
         //
+        return view('empresas.create');
     }
 
     /**
@@ -41,6 +39,18 @@ class EmpresasController extends Controller
     public function store(Request $request)
     {
         //
+
+        $request->validate([
+            'descripcion' => 'required',
+        ]);
+
+        $params=$request->all(); 
+       
+        unset($params['_token']);
+        Empresas::create($params);
+        return redirect()->route('empresas.index')->with('success','Empresa Creada.');   
+    
+
     }
 
     /**
@@ -60,9 +70,10 @@ class EmpresasController extends Controller
      * @param  \App\Empresas  $empresas
      * @return \Illuminate\Http\Response
      */
-    public function edit(Empresas $empresas)
+    public function edit(Empresas $empresa)
     {
         //
+        return view('empresas.edit',compact('empresa'));
     }
 
     /**
@@ -72,9 +83,14 @@ class EmpresasController extends Controller
      * @param  \App\Empresas  $empresas
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Empresas $empresas)
+    public function update(Request $request, Empresas $empresa)
     {
         //
+        $params = $request->all();  
+        $empresa->update($params);
+
+        return redirect()->route('empresas.index')->with('success','Empresa Actualizada.');   
+    
     }
 
     /**
