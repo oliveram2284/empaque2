@@ -62,9 +62,24 @@
     text-decoration: none;
 }
 
+.btn.btn-link-red {
+    color: #fb434a;
+    border-color: transparent !important;
+    background: none !important;
+    text-decoration: none;
+}
+.btn.btn-link-yellow {
+    color: #f39834 !important;
+    border-color: transparent !important;
+    background: none !important;
+    text-decoration: none;
+}
+
 .btn.btn-link:hover, .btn.btn-link:active, .btn.btn-link:focus, .btn.btn-link.active {
     color: #08f;
 }
+
+
 
 .btn.btn-icon {
     padding: 0.76rem;

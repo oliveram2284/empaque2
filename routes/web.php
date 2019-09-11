@@ -45,6 +45,9 @@ Route::resource('empresas','EmpresasController');
 Route::get('pedidos/nuevo','PedidosController@create')->name('pedidos.nuevo');  
 Route::get('pedidos/emitidos','PedidosController@emitidos')->name('pedidos.emitidos');  
 
+
+//ajax Request
+Route::get('pedido/get-log/{id}', 'PedidosController@ajaxPedidoLogs')->name('pedido.ajax_log');
 /*Route::group(['namespace' => 'Pedidos'], function() {
   Route::get('pedidos/emitidos','PedidosController@emitidos')->name('pedidos.emitidos');  
 });*/
