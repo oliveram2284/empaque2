@@ -16,7 +16,7 @@ class Pedidos extends Model
     ];
 
     /** 
-     * RELACION CON TABLE GRUPO
+     * RELACION CON Logs GRUPO
     */
     public function logs(){
         return $this->hasMany('App\Pedido_Logs','pedidoId','npedido');
@@ -24,6 +24,11 @@ class Pedidos extends Model
     }
 
     /** 
-     * RELACION CON TABLE GRUPO
+     * RELACION CON TABLE CLIENTES
     */
+
+    public function cliente(){
+        return $this->hasOne('App\Clientes','cod_client','clientefact');
+        // return $this->hasOne('App\Grupo','id_grupo','group_id');
+    }
 }

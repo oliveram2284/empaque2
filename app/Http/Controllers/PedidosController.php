@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use App\Pedidos;
 use App\Pedido_Logs;
 class PedidosController extends Controller
@@ -15,8 +16,20 @@ class PedidosController extends Controller
         
     }
 
+
+    public function create(){
+        return view('pedidos.form');  
+    }
+
     public function emitidos(){
-        $pedidos=Pedidos::select(['*',
+        $user = auth()->user();
+       
+        $codigo= substr($user->username, 0,2);       
+        if($user->group_id=='42'){ //is admin
+
+            $isAdmin=true;
+
+            $pedidos=Pedidos::select(['*',
             'npedido', 
             'codigo',
             'clienteNombre',
@@ -27,15 +40,91 @@ class PedidosController extends Controller
             'poliNumero as polId',
             'caras',
             DB::raw("(Select Count(*) From tbl_log_pedidos as tbl_log Where (tbl_log.pedidoEstado = 'R' or tbl_log.pedidoEstado = 'RR' or tbl_log.pedidoEstado = 'RN' or tbl_log.pedidoEstado = 'NO' or tbl_log.pedidoEstado = 'PX' or tbl_log.pedidoEstado = 'D' or tbl_log.pedidoEstado = 'NC') and tbl_log.pedidoId = npedido) as devolucion")])
-        ->where('estado','I')
-        ->orWhere('estado','R')
-        ->orWhere('estado','E')
-        ->orWhere('estado','RR')
-        ->orderby('npedido','ASC')
-       ->get();
+            ->where('estado','I')
+            ->orWhere('estado','R')
+            ->orWhere('estado','E')
+            ->orWhere('estado','RR')
+            ->orderby('npedido','ASC')
+            ->get();
+
+            
+        }else{
+
+            $isAdmin=false;
+
+            $pedidos=Pedidos::select(['*',
+            'npedido', 
+            'codigo',
+            'clienteNombre',
+            'descripcion as Articulo',
+            'estado',
+            'femis',
+            'prodHabitual',
+            'poliNumero as polId',
+            'caras',
+            DB::raw("(Select Count(*) From tbl_log_pedidos as tbl_log Where (tbl_log.pedidoEstado = 'R' or tbl_log.pedidoEstado = 'RR' or tbl_log.pedidoEstado = 'RN' or tbl_log.pedidoEstado = 'NO' or tbl_log.pedidoEstado = 'PX' or tbl_log.pedidoEstado = 'D' or tbl_log.pedidoEstado = 'NC') and tbl_log.pedidoId = npedido) as devolucion")])
+            ->whereRaw("codigo REGEXP '^".$codigo."'") 
+            ->where('estado','I')
+            ->orWhere('estado','R')
+            ->orWhere('estado','E')
+            ->orWhere('estado','RR')
+            ->orderby('npedido','ASC')
+            ->get();
+        }
        
+        
+        return view('pedidos.emitidos',compact('isAdmin','pedidos'));  
+    }
+
+    public function recibidos(){
+        $user = auth()->user();
+        
+        $codigo= substr($user->username, 0,2);      
+        
+        DB::enableQueryLog(); 
+        if($user->group_id=='42'){ //is admin
+            $pedidos=Pedidos::select(['*',
+            'npedido', 
+            'codigo',
+            'clienteNombre',
+            'descripcion as Articulo',
+            'estado',
+            'femis',
+            'prodHabitual',
+            'poliNumero as polId',
+            'caras',
+            DB::raw("(Select Count(*) From tbl_log_pedidos as tbl_log Where (tbl_log.pedidoEstado = 'R' or tbl_log.pedidoEstado = 'RR' or tbl_log.pedidoEstado = 'RN' or tbl_log.pedidoEstado = 'NO' or tbl_log.pedidoEstado = 'PX' or tbl_log.pedidoEstado = 'D' or tbl_log.pedidoEstado = 'NC') and tbl_log.pedidoId = npedido) as devolucion")])
+            ->where('estado','A')
+            ->orWhere('estado','D')
+            ->orWhere('estado','RN')
+            ->orderby('npedido','ASC')
+            ->get();
+        }else{
+            $pedidos=Pedidos::select(['*',
+            'npedido', 
+            'codigo',
+            'clienteNombre',
+            'descripcion as Articulo',
+            'estado',
+            'femis',
+            'prodHabitual',
+            'poliNumero as polId',
+            'caras',
+                DB::raw("(Select Count(*) From tbl_log_pedidos as tbl_log Where (tbl_log.pedidoEstado = 'R' or tbl_log.pedidoEstado = 'RR' or tbl_log.pedidoEstado = 'RN' or tbl_log.pedidoEstado = 'NO' or tbl_log.pedidoEstado = 'PX' or tbl_log.pedidoEstado = 'D' or tbl_log.pedidoEstado = 'NC') and tbl_log.pedidoId = npedido) as devolucion")])
+            ->where('estado','A')
+            ->orWhere('estado','D')
+            ->orWhere('estado','RN')
+            ->whereRaw("codigo REGEXP '^".$codigo."'") 
+
+            ->orderby('npedido','ASC')
+
+            ->get();
+        }
+
+        //dd(DB::getQueryLog());        
+        //dd($pedidos);
        
-        return view('pedidos.emitidos',compact('pedidos'));  
+        return view('pedidos.recibidos',compact('user','pedidos'));  
     }
 
 

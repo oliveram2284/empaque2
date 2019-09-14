@@ -30,20 +30,22 @@ Route::get('/logout','HomeController@logout')->name('logout');
 
 
  
-Route::resource('usuarios','UsersController');
+Route::resource('usuarios','UsersController')->middleware('auth');
 
 Route::get('/importar', 'UsersController@import');
-Route::resource('areas','AreaController');
-Route::resource('componentes_laminados','ComponeteLaminadoController');
+Route::resource('areas','AreaController')->middleware('auth');
+Route::resource('componentes_laminados','ComponeteLaminadoController')->middleware('auth');
 Route::get('/componentes_laminados/delete/{id}', 'ComponeteLaminadoController@destroy')->name('componentes_laminados.delete');
 
-Route::resource('categorias','CategoriaController');
-Route::resource('depositos','DepositoController');
-Route::resource('empresas','EmpresasController');
+Route::resource('categorias','CategoriaController')->middleware('auth');
+Route::resource('depositos','DepositoController')->middleware('auth');
+Route::resource('empresas','EmpresasController')->middleware('auth');
 
 
-Route::get('pedidos/nuevo','PedidosController@create')->name('pedidos.nuevo');  
-Route::get('pedidos/emitidos','PedidosController@emitidos')->name('pedidos.emitidos');  
+Route::get('pedidos/nuevo','PedidosController@create')->name('pedidos.nuevo')->middleware('auth');  
+Route::get('pedidos/store','PedidosController@store')->name('pedidos.store')->middleware('auth');  
+Route::get('pedidos/emitidos','PedidosController@emitidos')->name('pedidos.emitidos')->middleware('auth');  
+Route::get('pedidos/recibidos','PedidosController@recibidos')->name('pedidos.recibidos')->middleware('auth');  
 
 
 //ajax Request

@@ -32,6 +32,11 @@
                 <span class="cui-menu-left-title">Emitidos</span>
               </a>
             </li>
+            <li class="cui-menu-left-item">
+                <a href="{{route('pedidos.recibidos')}}">
+                  <span class="cui-menu-left-title">Recibidos</span>
+                </a>
+              </li>
             {{-- 
             <li class="cui-menu-left-item">
               <a href="/pages/login-beta">

@@ -23,18 +23,12 @@
                             <th class="text-center">Código</th>
                             <th>Cliente</th>
                             <th>Producto</th>
-                            <th>Emisión</th>
-                            @if ($isAdmin)
-                              <th class="text-center">Editar</th>
-                              <th class="text-center">Recibir</th>
-                              <th class="text-center">Rehacer</th>
-                              <th class="text-center">Cancelar</th>
-                              <th class="text-center">Motivos</th>    
-                            @else
+                            <th>Recepción</th>
+                            <th>Producción</th>                            
+                            <th class="text-center">Rehacer</th>
+                            <th class="text-center">Cancelar</th>
+                            <th class="text-center">Motivos</th>         
                             
-                              <th class="text-center">Editar</th>
-                              <th class="text-center">Motivos</th> 
-                            @endif
                             
                         </tr>
                         </thead>
@@ -56,42 +50,29 @@
                                     <a href="#"> {{strtoupper($item->clienteNombre)}} </a>
                                   </td>
                                   <td>{{strtoupper($item->Articulo)}}</td>
-                                  <td>{{$item->femis}}</td>
+                                  <td>{{$item->frecep}}</td>
 
-                                  @if (($isAdmin))
+                                 
                                     <td class="text-center">
-                                        <a class="view_pass_bt btn btn-sm btn-rounded btn-icon btn-success mr-2" href="{{ route('pedidos.emitidos') }}" >
-                                            <i class="icmn-pencil" aria-hidden="true"></i>                            
+                                        <a class="view_pass_bt btn btn-sm btn-rounded btn-icon btn-success mr-2" href="" >
+                                            <i class="icmn-checkmark " aria-hidden="true"></i>                            
                                         </a>
 
                                     </td>
+                                    
                                     <td class="text-center">  
-                                      <?php if($item->estado=='I' ):?>
-                                        <a class="view_pass_bt btn btn-sm btn-rounded btn-icon btn-info mr-2" href="{{ route('pedidos.emitidos') }}" >
-                                            <i class="icmn-plus" aria-hidden="true"></i>                            
+                                      
+                                        <a class="view_pass_bt btn btn-sm btn-rounded btn-icon btn-danger mr-2" href="" >
+                                            <i class="icmn-loop" aria-hidden="true"></i>                            
                                         </a>
-                                      <?php endif;?>
+                                      
                                     </td>
                                     <td class="text-center"> 
-                                        <?php if($item->estado=='I' ):?>
-                                          <a class="view_pass_bt btn btn-sm btn-rounded btn-icon btn-danger mr-2" href="{{ route('pedidos.emitidos') }}" >
-                                              <i class="icmn-loop" aria-hidden="true"></i>                            
-                                          </a>
-                                        <?php endif;?>
-                                    </td>
-                                    <td class="text-center"> 
-                                        <a class="delete_bt btn btn-icon btn-link-red icmn-cross mr-2 mb-2"  href="{{ route('pedidos.emitidos') }}">
+                                        <a class="delete_bt btn btn-icon btn-link-red icmn-cross mr-2 mb-2"  href="">
                                                                       
                                         </a>
                                     </td>
-                                  @else
-                                    <td class="text-center">
-                                        <a class="view_pass_bt btn btn-sm btn-rounded btn-icon btn-success mr-2" href="{{ route('pedidos.emitidos') }}" >
-                                            <i class="icmn-pencil" aria-hidden="true"></i>                            
-                                        </a>
-
-                                    </td>
-                                  @endif
+                                  
 
                                   
                                   <td class="text-center"> 
@@ -185,13 +166,6 @@
                 tbody+='</tr>';
               });
               $("#modal_view_log").find("table tbody").empty().html(tbody);
-              /*$("#create_modal form").attr('action',url_edit);
-              $("#create_modal input[name='nombre']").val(response.usuario.nombre);
-              $("#create_modal input[name='nombre_real']").val(response.usuario.nombre_real);
-              $("#create_modal input[name='contrasenia']").val(response.usuario.contrasenia);
-              $("#create_modal select[name='id_grupo'] option[value='"+response.usuario.id_grupo+"']").attr('selected','selected');
-              $("#create_modal select[name='catId'] option[value='"+response.usuario.catId+"']").attr('selected','selected');
-              */
               $("#modal_view_log").modal('show');
             }
             
@@ -208,19 +182,6 @@
       };
       console.debug("===> data_ajax: %o", data_ajax);
       $.ajax(data_ajax);
-        /*var tbody='';
-        $.each(data.logs,function(index,item){
-          console.log("===> DATA: %o",index);
-          console.log("===> DATA: %o",item);
-          tbody+='<tr>';
-          tbody+='';  
-          tbody+='<td>'+item.'</td>';  
-          tbody+='</tr>';
-        });*/
-        //modal_view_log
-       
-
-        return false
       });
 
      
