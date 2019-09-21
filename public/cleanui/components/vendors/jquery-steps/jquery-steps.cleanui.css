@@ -7,7 +7,11 @@
     font-family: 'Nunito Sans', sans-serif;
     border-color: #e4e9f0;
 }
-
+.wizard>.content>.body label{
+    display: inline-block;
+    margin-bottom: .5em;
+    font-weight: 600;
+}
 .wizard > .content > .body input.form-control:hover {
     border-color: #0190fe;
 }

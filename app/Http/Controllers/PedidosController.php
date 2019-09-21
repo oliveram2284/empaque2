@@ -18,7 +18,12 @@ class PedidosController extends Controller
 
 
     public function create(){
-        return view('pedidos.form');  
+
+        $codigo_pedido=Pedidos::getNextNro();
+        $params=array(
+            'codigo_pedido'=>$codigo_pedido
+        );
+        return view('pedidos.form',$params);  
     }
 
     public function emitidos(){

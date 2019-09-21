@@ -47,7 +47,8 @@
   <script src="{{ URL::asset('cleanui/vendors/jquery-typeahead/dist/jquery.typeahead.min.js') }}"></script>
   <script src="{{ URL::asset('cleanui/vendors/jquery-mask-plugin/dist/jquery.mask.min.js') }}"></script>
   <script src="{{ URL::asset('cleanui/vendors/autosize/dist/autosize.min.js') }}"></script>
-  <script src="{{ URL::asset('cleanui/vendors/bootstrap-show-password/bootstrap-show-password.min.js') }}"></script>
+  {{-- <script src="{{ URL::asset('cleanui/vendors/bootstrap-show-password/bootstrap-show-password.min.js') }}"></script>
+  --}}
   <script src="{{ URL::asset('cleanui/vendors/moment/min/moment.min.js') }}"></script>
   <script src="{{ URL::asset('cleanui/vendors/tempus-dominus-bs4/build/js/tempusdominus-bootstrap-4.min.js') }}"></script>
   <script src="{{ URL::asset('cleanui/vendors/fullcalendar/dist/fullcalendar.min.js') }}"></script>
