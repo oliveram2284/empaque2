@@ -177,6 +177,8 @@
         headerTag: "h3",
         bodyTag: "section",
         transitionEffect: "slideLeft",
+        autoFocus: true,
+        labels:labels,
         onStepChanging: function (event, currentIndex, newIndex){              
           return form_validate();
         },
