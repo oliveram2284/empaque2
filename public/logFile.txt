@@ -1,0 +1,24 @@
+*   Trying 200.59.80.205...
+* TCP_NODELAY set
+* Connected to 58d70548161e.sn.mynetname.net (200.59.80.205) port 301 (#0)
+> GET /empaque_demo/buscarProductoFicha.php?id=I0E081041C0 HTTP/1.1
+Host: 58d70548161e.sn.mynetname.net:301
+Accept: */*
+Content-Type: application/json
+Connection: Keep-Alive
+
+< HTTP/1.1 200 OK
+< Date: Mon, 14 Oct 2019 14:49:18 GMT
+< Server: Apache/2.2.21 (Win32) PHP/5.3.10
+< X-Powered-By: PHP/5.3.10
+< Access-Control-Allow-Origin: *
+< Set-Cookie: PHPSESSID=qnv0d60va00prtovnf5gqkh950; path=/
+< Expires: Thu, 19 Nov 1981 08:52:00 GMT
+< Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+< Pragma: no-cache
+< Keep-Alive: timeout=5, max=100
+< Connection: Keep-Alive
+< Transfer-Encoding: chunked
+< Content-Type: application/json
+< 
+* Connection #0 to host 58d70548161e.sn.mynetname.net left intact

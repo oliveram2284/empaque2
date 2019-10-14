@@ -383,6 +383,8 @@
 <script>
   ;(function($) {
     'use strict'
+
+
     $(function() {      
 
       
@@ -476,62 +478,12 @@
 
      
       
-      //ABRIR MODAL BUSCADOR CLIENTE
-      $(document).on('click',"#input_clienteNombre ",function(e){
-        $("#search_client_modal").modal('show'); 
-      });
+      
 
-      //MODAL BUSCADOR CLIENTE
-      $(document).on('keypress',"#search_client_modal #cliente_search_input",function(e){
-        var value=$(this).val();
-        var url='http://58d70548161e.sn.mynetname.net:301/empaque_demo/buscarCliente.php';
-        var input = [];
-        input.push(value);        
-        var data_ajax = {  
-          'dataType': 'json',
-          'method': 'POST',
-          'data': { xinput: input },
-          'url': url,
-          success: function(response) {
-            var output='';
-            if(response!=0 && response!==undefined){
-              $.each(response,function(index, item){
-                if(index % 2){
-                  output+='<tr class="table-success">';
-                }else{
-                  output+='<tr>';
-                }
-                output+='<td class="text-center"><a class="btn btn-sm btn-rounded btn-icon btn-success mr-2" data-cliente="'+encodeURIComponent(JSON.stringify(item))+'"><i class="icmn-checkmark2" aria-hidden="true"></i></a></td>'
-                output+='<th scope="row">'+item.cod_client+'</th>';
-                output+='<td>'+item.razon_soci+'</td>'
-                output+='</tr>';
-              });              
-            }
-            $("#search_client_modal table tbody").empty().html(output);          
-            return false;
-          },
-          error: function(error) {
-              console.debug("===> ERROR: %o", error);
-          }
-        };
-        console.log("===> data_ajax: %o", data_ajax);
-       $.ajax(data_ajax);
-      });
+      
     });
 
-    //SELECCIONAR CLIENTE
-    $(document).on('click',"#search_client_modal table tr td a.btn",function(e){      
-      var cliente_data=$(this).data('cliente');
-      var data = JSON.parse(decodeURIComponent(cliente_data));
-      $("#form-step-cliente input[name='clienteNombre']").val(data.razon_soci);
-      $("#form-step-cliente input[name='codigoTanto']").val(data.cod_client);
-      $("#form-step-cliente input[name='clienteDirecc']").val(data.domicilio);
-      $("#form-step-cliente input[name='clienteTelef']").val(data.telefono_1);
-      $("#form-step-cliente input[name='clienteCUIT']").val(data.cuit);
-      $("#form-step-cliente input[name='codigoTangoFacturar']").val(data.razon_soci);
-      $("#search_client_modal").modal('hide');
-      return false;
-    });
+    
 
     $.ajaxSetup({
       headers: {
