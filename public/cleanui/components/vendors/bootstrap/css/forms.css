@@ -27,6 +27,9 @@ input:-ms-input-placeholder {
     border-color: #e4e9f0;
     color: #74708d;
 }
+select.form-control{
+    padding: 0.6rem 1.23rem;
+}
 
 .form-control.form-control-rounded {
     border-radius: 500px;
@@ -114,3 +117,29 @@ span.input-group-addon {
 .input-group .add-on.input-group-addon i {
     line-height: 2.2;
 }
+
+
+
+.btn-group.special {
+    display: flex;
+}
+
+.special .btn {
+    flex: 1
+}
+
+.special2{
+    padding-top: 5px;
+}
+
+.form-aliceblue{
+    background-color:aliceblue;
+}
+
+.wizard > .content{
+    height: max-content;
+    min-height: 1000px;
+}
+/*.wizard > .content #form-step-cliente-p-1{
+    background-color: #46be8a;
+}*/

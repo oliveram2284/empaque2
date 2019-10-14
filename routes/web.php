@@ -37,6 +37,7 @@ Route::resource('areas','AreaController')->middleware('auth');
 Route::resource('componentes_laminados','ComponeteLaminadoController')->middleware('auth');
 Route::get('/componentes_laminados/delete/{id}', 'ComponeteLaminadoController@destroy')->name('componentes_laminados.delete');
 
+
 Route::resource('categorias','CategoriaController')->middleware('auth');
 Route::resource('depositos','DepositoController')->middleware('auth');
 Route::resource('empresas','EmpresasController')->middleware('auth');
@@ -50,6 +51,19 @@ Route::get('pedidos/recibidos','PedidosController@recibidos')->name('pedidos.rec
 
 //ajax Request
 Route::get('pedido/get-log/{id}', 'PedidosController@ajaxPedidoLogs')->name('pedido.ajax_log');
+Route::get('campos_obligatorios/{campo_id}' ,'AjaxController@GetCamposObligatorios')->name('ajax_request.campos_obligatorios');
+Route::get('buscar_producto/{keyword}' ,'AjaxController@SearchProduct')->name('ajax_request.buscar_producto');
+Route::get('buscar_cliente/{keyword}' ,'AjaxController@SearchClients')->name('ajax_request.buscar_clientes');
+
+Route::get('ficha_tecnica/{product_code}' ,'AjaxController@getFichaTecnica')->name('ajax_request.ficha_tecnica');
+
+
+Route::prefix('pages')->group(function () {
+  Route::get('page-404', function () {
+    return view('pages.pages.page-404');
+  });
+});
+
 /*Route::group(['namespace' => 'Pedidos'], function() {
   Route::get('pedidos/emitidos','PedidosController@emitidos')->name('pedidos.emitidos');  
 });*/
@@ -149,7 +163,7 @@ Route::prefix('ecommerce')->group(function () {
 | Forms Pages
 |--------------------------------------------------------------------------
 */
-
+/*
 Route::prefix('forms')->group(function () {
   Route::get('basic-form-elements', function () {
     return view('pages.forms.basic-form-elements');
@@ -185,13 +199,13 @@ Route::prefix('forms')->group(function () {
     return view('pages.forms.extras');
   });
 });
-
+*/
 /*
 |--------------------------------------------------------------------------
 | Components Pages
 |--------------------------------------------------------------------------
 */
-
+/*
 Route::prefix('components')->group(function () {
   Route::get('date-picker', function () {
     return view('pages.components.date-picker');
@@ -248,7 +262,7 @@ Route::prefix('components')->group(function () {
     return view('pages.components.mail-templates');
   });
 });
-
+*/
 /*
 |--------------------------------------------------------------------------
 | Tables Pages
@@ -389,7 +403,7 @@ Route::prefix('layout')->group(function () {
 | Icons Pages
 |--------------------------------------------------------------------------
 */
- 
+ /*
 
 Route::prefix('icons')->group(function () {
   Route::get('fontawesome', function () {
@@ -402,7 +416,7 @@ Route::prefix('icons')->group(function () {
     return view('pages.icons.icomoon-free');
   });
 });
-
+*/
 //Route::get('/usuarios','UsersController@index')->name('usuarios');
 /*
 Route::post('/usuarios/add','UsuariosController@store')->name('usuarios.add');
@@ -427,9 +441,10 @@ Route::prefix('Usuarios')->group(function () {
   Route::get('docs', function () {
     return view('pages.dashboard.docs');
   });
-});*/ Route::get('alpha', function () {
+});*/
+Route::get('alpha', function () {
     return view('pages.dashboard.alpha');
-  });
+});
 
 
 

@@ -51,3 +51,72 @@
         </div>
     </div>
 </div>
+
+
+<!-- START: page scripts -->
+<script>
+    (function($) {
+    'use strict'
+        console.log("=====> LOAD MODAL VIEW SEARCH CLIENTS <====");
+
+        //ABRIR MODAL BUSCADOR CLIENTE
+        $(document).on('click',"#input_clienteNombre ",function(e){
+            $("#search_client_modal").modal('show'); 
+        });
+
+        //MODAL BUSCADOR CLIENTE
+        $(document).on('keyup',"#search_client_modal #cliente_search_input",function(e){
+            var value=$(this).val();
+            /*var url='http://58d70548161e.sn.mynetname.net:301/empaque_demo/buscarCliente.php';
+            var input = [];
+            input.push(value);   */    
+            
+            var value=$(this).val();
+            var url= "{{route('ajax_request.buscar_clientes','')}}";
+            url+="/"+value;           
+            var data_ajax = {  
+                'dataType': 'json',
+                'method': 'GET',
+                'url': url,
+                success: function(response) {
+                    var output='';
+                    if(response!=0 && response!==undefined){
+                    $.each(response.clients,function(index, item){
+                        if(index % 2){
+                            output+='<tr class="table-success">';
+                        }else{
+                            output+='<tr data-cliente="'+encodeURIComponent(JSON.stringify(item))+'" >';
+                        }
+                        output+='<td class="text-center"><a class="btn btn-sm btn-rounded btn-icon btn-success mr-2" ><i class="icmn-checkmark2" aria-hidden="true"></i></a></td>'
+                        output+='<th scope="row">'+item.cod_client+'</th>';
+                        output+='<td>'+item.razon_soci+'</td>'
+                        output+='</tr>';
+                    });              
+                    }
+                    $("#search_client_modal table tbody").empty().html(output);          
+                    return false;
+                },
+                error: function(error) {
+                    console.debug("===> ERROR: %o", error);
+                }
+            };
+            $.ajax(data_ajax);
+        });
+
+        //SELECCIONAR CLIENTE
+        $(document).on('click',"#search_client_modal table tr",function(e){      
+            var cliente_data=$(this).data('cliente');
+            var data = JSON.parse(decodeURIComponent(cliente_data));
+            $("#form-step-cliente input[name='clienteNombre']").val(data.razon_soci);
+            $("#form-step-cliente input[name='codigoTanto']").val(data.cod_client);
+            $("#form-step-cliente input[name='clienteDirecc']").val(data.domicilio);
+            $("#form-step-cliente input[name='clienteTelef']").val(data.telefono_1);
+            $("#form-step-cliente input[name='clienteCUIT']").val(data.cuit);
+            $("#form-step-cliente input[name='codigoTangoFacturar']").val(data.razon_soci);
+            $("#search_client_modal").modal('hide');
+            return false;
+        });
+
+    })(jQuery)
+</script>
+<!-- END: page scripts -->

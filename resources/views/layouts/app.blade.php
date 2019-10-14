@@ -6,7 +6,7 @@
 @include('components.menuLeft')
 <div class="cui-layout">
 <div class="cui-layout-header">
-@include('components.topBar')
+    @include('components.topBar')
 </div>
 <div class="cui-layout-content">
 @include('components.breadcrumbs')

@@ -20,8 +20,13 @@ class PedidosController extends Controller
     public function create(){
 
         $codigo_pedido=Pedidos::getNextNro();
+        $formatos=DB::table('formatos')->get();
+        $materiales=DB::table('materiales')->get();
+        
         $params=array(
-            'codigo_pedido'=>$codigo_pedido
+            'codigo_pedido'=>$codigo_pedido,
+            'formatos' => $formatos,
+            'materiales' => $materiales ,
         );
         return view('pedidos.form',$params);  
     }
@@ -135,7 +140,6 @@ class PedidosController extends Controller
 
 
     public function ajaxPedidoLogs($pedido_id){
-        //'id_usuario','usuarioId'
         $logs=DB::select("SELECT log.*, u.nombre_real as 'usuario' FROM tbl_log_pedidos as log LEFT JOIN usuarios as u ON log.usuarioId=u.id_usuario WHERE pedidoId='".$pedido_id."';");//Pedidos::find($pedido_id)->logs;
        
         return response()->json(['success'=>'Got Simple Ajax Request.','result'=>$logs  ]);

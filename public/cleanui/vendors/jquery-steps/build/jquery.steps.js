@@ -1260,7 +1260,7 @@ function stepClickHandler(event)
         oldIndex = state.currentIndex;
 
     if (anchor.parent().is(":not(.disabled):not(.current)"))
-    {
+    {   console.log("?>?????ASDASD")
         var href = anchor.attr("href"),
             position = parseInt(href.substring(href.lastIndexOf("-") + 1), 0);
 
@@ -2039,4 +2039,5 @@ var defaults = $.fn.steps.defaults = {
         loading: "Loading ..."
     }
 };
+console.log("ASD");
 })(jQuery);
