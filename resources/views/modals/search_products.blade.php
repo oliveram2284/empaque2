@@ -106,25 +106,31 @@
                 var material=response.Material;
                 var first_color=false;
 
-                console.log("===> RESPONSE: %o",response);          
+                console.log("===> FICHA TECNICA: %o",response);          
                 $("#input_producto_codigo").val(response.articulo.Id);
                 $("#input_producto_cod_tango").val(response.articulo.Nombre_en_Facturacion);
                 $("#input_producto_nombre").val(product_data.Articulo);
                 
-                $('#formato').prop('selectedIndex',0);
-                $("#ancho").val(null);
-                if(response.articulo.Largo !== undefined || response.articulo.Largo !=null)
-		  	    $("#largo").val();
-		  	    $("#micronaje").val(null);
-                $("#color").val(null);
-                $("#fuelle").val(null); 
-                /*
-                if(){
-                    $("#input_producto_formato").val();
-                }*/
+                $('#input_producto_formato').prop('selectedIndex',0);
+                $("#input_producto_ancho").val(null);
+		  	    $("#input_producto_largo").val();
+		  	    $("#input_producto_micronaje").val(null);
+                $("#input_producto_color").val(null);
+                $("#input_producto_fuelle").val(null); 
+               
+                //Obtiene medidas de Articulo
+                if( articulo.Largo !=null){
+                    $("#input_producto_largo").val(articulo.Largo);
+                }
 
+                if(articulo.Ancho !=null){
+                    $("#input_producto_ancho").val(articulo.Ancho);
+                }
+                if(articulo.Espesor !=null){
+                    $("#input_producto_micronaje").val(articulo.Espesor);
+                }
+                
                 $.each(response.Fichas_Tecnica_Detalle,function(index,item){
-
 
                     var i=0;
                     if(item.Id_Unidad_Medida=='200'){

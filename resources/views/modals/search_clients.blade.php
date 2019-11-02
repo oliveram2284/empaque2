@@ -80,7 +80,7 @@
                 'url': url,
                 success: function(response) {
                     var output='';
-                    if(response!=0 && response!==undefined){
+                    if(response!=0 && response !== undefined){
                     $.each(response.clients,function(index, item){
                         if(index % 2){
                             output+='<tr class="table-success">';

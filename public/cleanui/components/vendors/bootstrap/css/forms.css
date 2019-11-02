@@ -136,10 +136,35 @@ span.input-group-addon {
     background-color:aliceblue;
 }
 
+.wizard .content {
+    min-height: 100px;
+}
+.wizard .content > .body {
+    width: 100%;
+    height: auto;
+    padding: 15px;
+    position: absolute;
+}
+.wizard .content .body.current {
+    position: relative;
+}
+
+.wizard .actions li a{
+    background-color: #333333 !important;
+    border-color: #6a7a84 !important;
+    margin-left: 20px !important;
+    webkit-border-radius: 0p !important;
+    -moz-border-radius: 0px !important;
+    border-radius: 0px !important;
+}
+.wizard .actions li.disabled a{
+    background-color:#696969 !important;
+}
+/*
 .wizard > .content{
     height: max-content;
     min-height: 1000px;
-}
+}*/
 /*.wizard > .content #form-step-cliente-p-1{
     background-color: #46be8a;
 }*/
