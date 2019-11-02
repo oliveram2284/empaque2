@@ -6,6 +6,7 @@
     padding-bottom: 1.53rem;
 }
 
+
 .cui-config-borderless .card-header {
     padding-top: 1.53rem;
     padding-bottom: 0;
@@ -21,7 +22,10 @@
     text-transform: uppercase;
     font-size: 1.23rem;
 }
-
+.cui-config-borderless .background-img{
+    background-position: center center;
+    background-size: cover;
+}
 .cui-config-squared-corners .card,
 .cui-config-squared-corners .cui-footer,
 .cui-config-squared-corners .cui-utils-widget {
@@ -32,6 +36,8 @@
     max-width: 1420px;
     margin: 0 auto;
 }
+
+
 
 @media (min-width: 992px) {
     .cui-config-fixed-width .cui-utils-content {

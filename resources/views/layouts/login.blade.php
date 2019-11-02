@@ -1,6 +1,6 @@
 @include('components.head')
 <body class="cui-config-borderless cui-menu-colorful cui-menu-left-shadow">    
-    <div style="background-image: url(/cleanui/components/pages/common/img/login/1.jpeg)" >
+    <div style="background-image: url(/cleanui/components/pages/common/img/login/6.jpeg)" class="background-img" >
         <div class="cui-layout cui-layout-has-sider">
             <div class="cui-layout">
                 
