@@ -56,6 +56,7 @@ Route::get('buscar_producto/{keyword}' ,'AjaxController@SearchProduct')->name('a
 Route::get('buscar_cliente/{keyword}' ,'AjaxController@SearchClients')->name('ajax_request.buscar_clientes');
 
 Route::get('ficha_tecnica/{product_code}' ,'AjaxController@getFichaTecnica')->name('ajax_request.ficha_tecnica');
+Route::get('obtener_cantidad/{id_formato}' ,'AjaxController@getFormatoCantidades')->name('ajax_request.obtener_cantidad');
 
 
 Route::prefix('pages')->group(function () {

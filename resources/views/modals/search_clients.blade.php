@@ -61,6 +61,7 @@
 
         //ABRIR MODAL BUSCADOR CLIENTE
         $(document).on('click',"#input_clienteNombre ",function(e){
+            $("#search_client_modal").find("#cliente_search_input").focus();
             $("#search_client_modal").modal('show'); 
         });
 

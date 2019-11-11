@@ -49,9 +49,11 @@ class AjaxController extends Controller
         $response = Curl::to($url)
         ->withData($params)
         ->post();
-
+        /*
+        $response = file_get_contents( 'jsons/clientes.json');
+       */
         $result=json_decode($response,true);
-       
+        $response=array();
         return response()->json(['success'=>'Products filtered.','clients'=>$result]);
         
     }
@@ -68,5 +70,12 @@ class AjaxController extends Controller
         ->get();
 
         return $response->content;
+    }
+
+    public function getFormatoCantidades($formato_id){
+
+        $formato= DB::table("formatos_cantidades")->where('formato_id',$formato_id)->get()->all();
+       
+        return response()->json(['result'=>$formato]);
     }
 }
