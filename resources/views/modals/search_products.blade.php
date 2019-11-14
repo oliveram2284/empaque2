@@ -104,7 +104,6 @@
             'method': 'GET',
             'url':url ,            
             success: function(response) {      
-
                 console.log("===> FICHA TECNICA: %o",response);    
                 $("#form-step-cliente-p-1 input").val(null);
                 $("#form-step-cliente-p-1 select").prop('selectedIndex', 0); 
@@ -135,11 +134,8 @@
                 if (ficha_tecnica_detalle.length < 1) {
                     var output = "<p style='font-size:20px; color:#000000'>El Articulo <b style='color:red'> " + valor + " </b> <br> No posee Ficha Técnica en Mercedario.<br> Por favor, ingrese datos manualmente<p>";
                     swal({
-                        title: "Advertencia!",
-                        text: output,
-                        type: "warning",
-                        confirmButtonText: "Ok",
-                        html: true
+                        title: "Advertencia!",text: output,
+                        type: "warning",confirmButtonText: "Ok",html: true
                     });
                     color = data.Color.Color;
                     return false;
@@ -148,39 +144,29 @@
 
                 var cantidad_pistas = null;
                 $.each(ficha_tecnica_detalle, function(index, item) {
-                    console.log("===> FICHA TECNICA index: %o",index); 
-                    console.log("===> FICHA TECNICA item: %o",item); 
 
                     if (item.Id_Unidad_Medida == '200') {
-                        console.debug("===> ANCHO: %o", item.Valor);
                         $("#input_producto_ancho").val(parseFloat(item.Valor).toFixed(2));                        
                     }
     
                     if (item.Id_Unidad_Medida == '5000') { //.Nombre=='LARGO PT'||item.Nombre=="LARGO  PT"){
-                        console.debug("===> largo: %o", item.Valor);    
                         $("#input_producto_largo").val(parseFloat(item.Valor).toFixed(2));                        
-                    }
+                    }    
     
-    
-                    //if(item.Nombre=='MICRONAJE 1'){
-
                     if (item.Id_Unidad_Medida == '40') {    
                         $("#input_producto_micronaje").val(parseFloat(item.Valor).toFixed());
-                    }
-    
+                    }    
     
                     if (item.Nombre == 'FUELLE 1') {
                         $("#input_producto_fuelle").val(item.Valor);
-                        i = 1;
                     }
 
                     if (item.Id_Unidad_Medida == "80") {
                         color = item.Referencia.replace('-', '').trim();
                     }
     
-                    if (item.Nombre == 'CANT. DE PISTAS' || item.Id_Unidad_Medida == "4005") {
-                        var cantidad_pistas = item.Valor;
-                       
+                    if (item.Nombre == 'CANT. DE PISTAS' || item.Id_Unidad_Medida == "4005") {                        
+                        cantidad_pistas = item.Valor;                       
                     }
 
                 });
@@ -192,14 +178,12 @@
                             $("#input_producto_largo").val(parseFloat(articulo.Largo).toFixed(2));
                             break;
                     }
-                    case 'I0':
-                        {
-                            console.log("===> articulo.Id: %o ", producto_id);
-                            $("#input_producto_micronaje").val(parseFloat(articulo.Espesor).toFixed());
-                            $("#input_producto_largo").val(parseFloat(articulo.Largo).toFixed(2));
-                            $("#input_producto_cant_pista").val(cantidad_pistas);    
-                            break;
-                        } 
+                    case 'I0':{
+                        $("#input_producto_micronaje").val(parseFloat(articulo.Espesor).toFixed());
+                        $("#input_producto_largo").val(parseFloat(articulo.Largo).toFixed(2));
+                        $("#input_producto_cant_pista").val(cantidad_pistas);    
+                        break;
+                    } 
                     default:   
                     break;
                 }
@@ -213,8 +197,7 @@
                 if (material != null) {
                     $("#input_producto_material option[value=" + material.material_id + "] ").attr("selected", "selected").trigger("change");
                 }
-
-                return;
+                
                 $("#search_product_modal table tbody").empty();
                 $("#search_product_modal").modal('hide');
                 return false;

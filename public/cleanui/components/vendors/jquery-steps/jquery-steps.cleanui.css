@@ -5,7 +5,7 @@
 
 .wizard > .content > .body input.form-control {
     font-family: 'Nunito Sans', sans-serif;
-    border-color: #e4e9f0;
+    border-color: #cccccc;
 }
 
 
@@ -22,6 +22,12 @@
     border-color: #0190fe;
 }
 
+
+
+.wizard  .content  .form-control {
+    color:#27252d;
+    font-weight: 600;
+}
 
 .wizard  .content  .form-group.has-danger .form-control {
     border-color: #fb434a;

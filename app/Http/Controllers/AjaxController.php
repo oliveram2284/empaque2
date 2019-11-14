@@ -59,6 +59,20 @@ class AjaxController extends Controller
     }
 
     public function getFichaTecnica($product_code){
+
+        /*//BUSCAR PRODUCTO
+        $params=array(
+            'xinput'=>$product_code,
+            'xpage'=>1,
+            'busq'=>1
+        );                
+        $url='http://58d70548161e.sn.mynetname.net:301/empaque_demo/buscarProducto.php';
+        $response = Curl::to($url)
+        ->withData($params )
+        ->post();*/
+
+       /* $producto_result=json_decode($response,true);
+        dump($producto_result);*/
         
         $url='http://58d70548161e.sn.mynetname.net:301/empaque_demo/buscarProductoFicha.php';
         $response = Curl::to($url)
@@ -77,5 +91,11 @@ class AjaxController extends Controller
         $formato= DB::table("formatos_cantidades")->where('formato_id',$formato_id)->get()->all();
        
         return response()->json(['result'=>$formato]);
+    }
+
+    public function getEtiquetaBobinasCantidades($formato_id){
+        $formato= DB::table("bobinas")->select( DB::raw("*, (largo*100) as 'largo_cm'"))->where('formato_id',$formato_id)->get()->all();
+       
+        return response()->json(['bobinas'=>$formato]);
     }
 }

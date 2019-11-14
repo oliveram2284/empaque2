@@ -284,6 +284,7 @@
             </div>
         </div>
     </div>
+    <input type="hidden" name="cant_pista" id="input_producto_cant_pista" >
 </fieldset>
 
 

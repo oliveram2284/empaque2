@@ -68,6 +68,8 @@
 @include('modals/search_clients');
 @include('modals/search_products');
 @include('modals/formato_cantidades')
+@include('modals/formato_etiquetas_cantidades')
+
 
 <!-- START: page scripts -->
 <script>
@@ -159,6 +161,7 @@
 
 
     $(document).on('change','#input_producto_formato',function(e){
+
      
       var formato_id=$(this).val();
       var url= "{{route('ajax_request.campos_obligatorios','')}}";
@@ -177,13 +180,10 @@
           }
           
           $("#input_producto_origen").attr("readonly",true);
-          console.table(data.result);
           
           $.each(data.result,function(index,item){
-            console.log("===> item: %o",item); 
-            console.log("===> item: %o","#input_producto_"+item); 
+            
             var input = $("#input_producto_"+item);
-            console.log("===> item: %o",input.length); 
             switch(item){
               case 'termo':
               case 'micro':
@@ -192,7 +192,6 @@
                 break;
               }
               case 'origen':{
-                console.log("===> item: %o","#input_producto_"+item); 
                 input.removeAttr('readonly');
                 break;
               }
@@ -210,39 +209,16 @@
     });
 
 
+    var obtiene_cantidad_etiqueta = function(){
 
-    $(document).on('click',"#input_producto_cantidad",function(e){
       var id_formato=$("#input_producto_formato").val();
       var largo=$("#input_producto_largo").val();
-      console.log("====> CANTIDAD CLICKED ");
-      console.log("====> id_formato: %o",id_formato);
+      var pistas=$("#input_producto_cant_pista").val();
 
-      if(id_formato==''){
-        swal({
-          title: "Error!",
-          text: "<b>Debe Seleccionar Formato.</b>",
-          type: "error",
-          html: true,
-          confirmButtonText: "Cerrar"
-        });
-        $("#input_producto_largo").focus();
-        return false;
-      }
+      var url= "{{route('ajax_request.obtener_etiqueta_cantidad','')}}"+"/"+id_formato;       
+      
+      console.log("===> url query : %o", url);
 
-      if(largo.length==0 && parseFloat(largo) == 0 ){
-        swal({
-          title: "Error!",
-          text: "<b>Debe Ingresar Largo de Producto.</b>",
-          type: "error",
-          html: true,
-          confirmButtonText: "Cerrar"
-        });
-        $("#input_producto_largo").focus();
-        return false;
-      }
-
-      var url= "{{route('ajax_request.obtener_cantidad','')}}";
-      url+="/"+id_formato;       
       var data_ajax={
         type: 'GET',
         url: url,
@@ -250,52 +226,204 @@
           xhr.overrideMimeType( "text/plain; charset=x-user-defined" );
         },
         success: function(data) {
-          console.log("=DATA: %o",data);  
-					if(data.result==null){
-						$("#input_producto_cantidad").removeAttr("readonly");
-						return false;
-					}else{
-						$(this).attr("readonly","readonly");
-					}
 
-          var largo	= $("#input_producto_largo").val();
-          
-					var tbody_content="";
-					$.each(data.result,function(index, item){
-            console.log("== item.largo: %o",item.largo);
-            console.log("== largo: %o",largo);
-						if(parseFloat(item.largo).toFixed(2)==parseFloat(largo).toFixed(2)){              
-							tbody_content +='<tr data-id="'+item.id+'"  data-multiplo="'+item.multiplo+'">';
-							tbody_content +='<td><a href="#" data-id="'+item.id+'"  data-multiplo="'+item.multiplo+'" class=""><i class="fa fa-circle-o fa-2x " aria-hidden="true"></i></a></td>';
-							tbody_content +='<td>'+item.descripcion+'</td>';
-							tbody_content +='<td>'+parseFloat(item.largo).toFixed(1)+'</td>';
-							tbody_content +='<td>'+parseFloat(item.ancho).toFixed(1)+'</td>';
-							tbody_content +='<td>'+item.multiplo+'</td>';
-							tbody_content +='</tr>';
-						}
+          console.log("=>>> BOBINA: %o", data);
+
+          var tbody_content = "";
+          $.each(data.bobinas, function(index, item) {
+              console.log("===> index: %o - %o", index, item);
+
+              var total_etiquetas = (parseFloat(item.largo_cm) / parseFloat(largo)) * parseInt(pistas);
+
+              total_etiquetas = total_etiquetas.toFixed();
+
+              tbody_content += '<tr data-id="' + item.id + '"  data-multiplo="' + total_etiquetas + '" data-largo="' + parseFloat(item.largo).toFixed(2) + '">';
+              tbody_content += '<td><a href="#" data-id="' + item.id + '"  data-multiplo="' + total_etiquetas + '" class=""><i class="fa fa-circle-o fa-2x " aria-hidden="true"></i></a></td>';
+              tbody_content += '<td>' + item.nombre + '</td>';
+              tbody_content += '<td>' + parseFloat(item.largo).toFixed(1) + '</td>';
+              tbody_content += '<td>' + pistas + '</td>';
+              tbody_content += '<td>' + total_etiquetas + '</td>';
+              tbody_content += '</tr>';
+
           });
-          
-					if(tbody_content==''){
-						$("#input_producto_cantidad").removeAttr("readonly");
-						return false;
+          console.log("===> tbody_content: %o", tbody_content);
+
+          if (tbody_content == '') {
+              $("#input_producto_cantidad").removeAttr("readonly");
+              return false;
           }
-          console.log("== tbody_content: %o",tbody_content);
-					$("#cantidad_modal #table_cant").find("tbody").html(tbody_content);
-					$("#cantidad_modal #table_cant tbody ").find("tr:first-child").trigger("click");
-          $("#cantidad_modal").modal("show");
+
+          $("#table_bobina_cant").find("tbody").html(tbody_content);
+          $("#table_bobina_cant tbody").find("tr:first-child").trigger("click");
+          $("#etiqueta_cantidad_modal").modal('show');
+          return false;
 
         },
         error:function(){
           console.log("===> error Carga Formato");
         },
         complete:function(){
+          console.log("===> complete")
         	//$("#cantidad_modal").modal("show");
         },
         dataType: 'json'
       };
       $.ajax(data_ajax);
+      return;
+    }
+
+
+    $("#table_cant tbody tr ").on('click', function() {
+      console.log("===> OPTION CLICKED: %o", $(this).find('i').length);
+      $("#table_cant tbody tr").removeClass('label label-success');
+      $("#table_cant tbody tr i").attr('class', 'fa fa-circle-o fa-2x '); //  removeClass('label label-success');
+      $(this).addClass('label label-success');
+      $(this).find('i').attr('class', 'fa fa-check-circle fa-2x  label label-success');
+      var multiplo = $(this).data('multiplo');
+      $("#multiplo_cant").val(multiplo);
+      $("#input_cant_pop").val(null);
+    });
+
+    $(document).on('click',"#table_bobina_cant tbody tr", function() {
+      console.log("===> OPTION CLICKED: %o", $(this).find('i').length);
+      $("#table_bobina_cant tbody tr").removeClass('label label-success');
+      $("#table_bobina_cant tbody tr i").attr('class', 'fa fa-circle-o fa-2x '); //  removeClass('label label-success');
+      $(this).addClass('label label-success');
+      $(this).find('i').attr('class', 'fa fa-check-circle fa-2x  label label-success');
+      var multiplo = $(this).data('multiplo');
+      var largo = $(this).data('largo');
+      $("#multiplo_etiqueta_cant").val(multiplo);
+      $("#largo_etiqueta_cant").val(largo);
+      $("#input_cant_etiqueta_pop").val(null);
 
     });
+    
+
+    $(document).on('keyup',"#input_cant_etiqueta_pop", function(event) {
+      var multiplo = $("#multiplo_etiqueta_cant").val();
+      if(multiplo.length==0){
+        swal({
+          title: "Advertencia!",
+          text: "Debe Seleccionar Una Bobina del Listado",
+          type: "warning",
+          confirmButtonText: "Ok",
+          html: true
+      });
+      }
+      console.log("==> input_cant_etiqueta_pop: %o", $(this).val());      
+      //var cant = $(this).val().split('.').join("");
+      var cant = $(this).val();      
+      var cant = parseInt(cant);            
+      var multiplo = $("#multiplo_etiqueta_cant").val();
+      
+      var min = 0;
+      var max = multiplo;
+      var i = 1;
+      var flag = false;
+
+      while (!flag) {
+        min = max;
+        max = multiplo * i;
+        if (cant >= max) {
+          i++;
+        } else {
+          flag = true;
+        }
+      }
+      console.log("===> i %o", i);
+      //medio= multiplo*0.5;
+      //medio=medio.toFixed();
+      var min_y_medio = parseInt(min) + parseInt(multiplo * 0.5);
+
+      var list_li = "";
+
+      if (cant == min || cant == max) {
+          list_li += '<li><input type="radio" value="' + cant + '" name="cantidad_opciones[]"> Cantidad Permitida: ' + cant + '</li>';
+      } else if (cant == min_y_medio) {
+          list_li += '<li><input type="radio" value="' + cant + '" name="cantidad_opciones[]"> Cantidad Permitida: ' + cant + '</li>';
+      } else if (cant < min) {
+          list_li += '<li><input type="radio" value="' + min + '" name="cantidad_opciones[]"> Cantidad Permitida : ' + min + '</li>';
+      } else if (cant < min_y_medio) {
+          list_li += '<li><input type="radio" value="' + min + '" name="cantidad_opciones[]"> Cantidad Permitida : ' + min + '</li>';
+          list_li += '<li><input type="radio" value="' + min_y_medio + '" name="cantidad_opciones[]"> Cantidad Permitida : ' + min_y_medio + '</li>';
+      } else if (cant < max) {
+
+          list_li += '<li><input type="radio" value="' + min_y_medio + '" name="cantidad_opciones[]"> Cantidad Permitida : ' + min_y_medio + '</li>';
+          list_li += '<li><input type="radio" value="' + max + '" name="cantidad_opciones[]"> Cantidad Permitida : ' + max + '</li>';
+      }
+
+
+      console.log("===> list_li %o", list_li);
+      $("#etiqueta_cantidad_modal #cant_etiquetas_allowed").empty().append(list_li);
+      return false;
+
+    });
+
+
+    $("#etiqueta_cantidad_modal .btn-primary").click(function() {
+      //console.log("Save bt");
+      var multiplo = $("#multiplo_etiqueta_cant").val();
+      var largo_bobina = parseFloat($("#largo_etiqueta_cant").val());
+      var radios_cants = $("#etiqueta_cantidad_modal .modal-body").find("input[type='radio']:checked");
+      console.log("====> multiplo: %o", multiplo);
+      console.log("====> multiplo: %o", (parseInt(radios_cants.val()) / parseInt(multiplo)));
+      var total_bobinas = (parseInt(radios_cants.val()) / parseInt(multiplo)).toFixed(2);
+      console.log("Equivale a " + total_bobinas + " Bobinas de " + largo_bobina + " Metros.");
+      $("#span_etiqueta").html("Equivale a " + total_bobinas + " Bobinas de " + largo_bobina + " Metros.").css("display", "block");
+      console.log("==> radios_cants: %o", radios_cants.length);
+      $(".cant_allowed").find("li.alert-danger").remove();
+      if (radios_cants.length == 0) {
+          $(".cant_etiquetas_allowed").append("<li class='alert alert-danger'>Debe seleccionar una cantidad disponible</li>");
+          return false;
+      } else {
+          $(".cant_etiquetas_allowed").find("li.alert-danger").remove();
+      }
+      $("#input_producto_cantidad").val(radios_cants.val()).focus();
+      $("#etiqueta_cantidad_modal").modal("hide");
+  });
+
+
+
+    
+
+    $(document).on('click',"#input_producto_cantidad",function(e){
+      var id_formato=$("#input_producto_formato").val();
+      switch (id_formato) {
+        case '0':{          
+          console.log("====> FORMATO 0");
+          swal({
+            title: "Error!",
+            text: "<b>Debe Seleccionar Formato.</b>",
+            type: "error",
+            html: true,
+            confirmButtonText: "Cerrar"
+          });
+          $("#input_producto_largo").focus();          
+          break;
+        }
+        case '6':{
+          obtiene_cantidad_etiqueta();
+          break;
+        }
+        case '13':
+        case '14':
+        case '15':{
+          console.log("====>  FORMATO %",id_formato);
+          procesa_cantidades_bolsa(id_formato,largo);
+          
+          break;
+        }
+        default:{
+          //alert("Formato Incorrecto:  " + id_formato + "");
+          $(this).removeAttr("readonly");         
+          break;
+        }
+
+      }
+      
+    });    
+
+   
 
     $(document).on('click',"#cantidad_modal #table_cant tbody tr ",function(e){
       console.log("===> OPTION CLICKED: %o",$(this).find('i').length );
@@ -407,7 +535,10 @@
 			}
 			$("#input_producto_cantidad").val(radios_cants.val()).focus();
 			$("#cantidad_modal").modal("hide");
-		});
+    });
+    
+
+
 
 
     

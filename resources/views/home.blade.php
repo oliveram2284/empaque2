@@ -7,6 +7,11 @@
     <div class="cui-utils-title mb-3">
       <strong class="text-uppercase font-size-16">PANEL DE INICIO</strong>
     </div>
+    <div class="row mt-3 mb-3 ">
+      <div class="col-xl-12">
+        <a href="{{route('pedidos.nuevo')}}" class="btn btn-primary width-200 btn-lg pull-right">NUEVO PEDIDO</a>
+      </div>
+    </div>
     <div class="row">
       <div class="col-xl-4">
         <div class="card cui-chart-card">
@@ -14,7 +19,9 @@
             <div class="chart-area-1 chartist"></div>
           </div>
           <div class="cui-chart-card-amount">1240</div>
-          <div class="cui-chart-card-title">Pedidos Emitidos</div>
+          <div class="cui-chart-card-title">
+            <a href="{{route('pedidos.emitidos')}}">Pedidos Emitidos</a>
+          </div>
         </div>
       </div>
       <div class="col-xl-4">
