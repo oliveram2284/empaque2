@@ -52,7 +52,7 @@ Route::get('pedidos/recibidos','PedidosController@recibidos')->name('pedidos.rec
 //ajax Request
 Route::get('pedido/get-log/{id}', 'PedidosController@ajaxPedidoLogs')->name('pedido.ajax_log');
 Route::get('campos_obligatorios/{campo_id}' ,'AjaxController@GetCamposObligatorios')->name('ajax_request.campos_obligatorios');
-Route::get('buscar_producto/{keyword}' ,'AjaxController@SearchProduct')->name('ajax_request.buscar_producto');
+Route::get('buscar_producto/{keyword}/{atype}' ,'AjaxController@SearchProduct')->name('ajax_request.buscar_producto');
 Route::get('buscar_cliente/{keyword}' ,'AjaxController@SearchClients')->name('ajax_request.buscar_clientes');
 
 Route::get('ficha_tecnica/{product_code}' ,'AjaxController@getFichaTecnica')->name('ajax_request.ficha_tecnica');

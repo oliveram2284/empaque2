@@ -568,3 +568,8 @@
 label.btn input {
     display: none;
 }
+
+span.required{
+    color: red;
+    font-weight: bolder;
+}

@@ -12,11 +12,31 @@
                 <div class="container-fluid">                    
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label text-center" for="l8">Buscar Producto</label>
-                        <div class="col-md-9">
+                        <div class="col-md-6">
                             <div class="input-group">
                             <input type="text" id="product_search_input" class="form-control" placeholder="Buscar Producto..." id="l8">
                            
                             </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="btn-group" data-toggle="buttons">
+                                <label class="btn btn-sm btn-outline-default active">
+                                  <input type="radio" name="busq" value="1" checked>
+                                  *
+                                </label>
+                                <label class="btn btn-sm btn-outline-default  ">
+                                    <input type="radio" name="busq" value="2">
+                                    + 
+                                  </label>
+                                  <label class="btn btn-sm btn-outline-default ">
+                                    <input type="radio" name="busq" value="3">
+                                    -
+                                  </label>
+                                <label class="btn btn-sm btn-outline-default" >
+                                  <input type="radio" name="busq" value="4">
+                                  +-
+                                </label>
+                              </div>
                         </div>
                     </div>
 
@@ -57,18 +77,21 @@
     //LISTAR PRODUCTOS
     $(document).on('keyup',"#search_product_modal #product_search_input",function(e){
         var value=$(this).val();
-        var url= "{{route('ajax_request.buscar_producto','')}}";
-        url+="/"+value;       
+        var tipo =$("#search_product_modal input[name='busq']:checked").val();
+        console.log("===> tipo: %o",tipo);
+        var url= "{{route('ajax_request.buscar_producto',array('',''))}}";
+        url+="/"+value+"/"+tipo;       
         var data_ajax = {  'dataType': 'json','method': 'GET',
             'url':url ,
             success: function(response) {                
               var output='';
               if(response.products!=0 && response.products!==undefined){
+                console.log("===> ")  
                 $.each(response.products,function(index, item){
                     if(index % 2){
                         output+='<tr class="table-success" data-id="'+item.Id+'" data-nombre="'+item.Articulo+'" data-nombrefact="'+item.Nombre_en_Facturacion+'">';
                     }else{
-                        output+='<tr data-id="'+item.Id+'">';
+                        output+='<tr class="" data-id="'+item.Id+'" data-id="'+item.Id+'" data-nombre="'+item.Articulo+'" data-nombrefact="'+item.Nombre_en_Facturacion+'">';
                     }
                     output+='<td class="text-center"><a class="btn btn-sm btn-rounded btn-icon btn-success mr-2" ><i class="icmn-checkmark2" aria-hidden="true"></i></a></td>'
                     output+='<th scope="row">'+item.Id+'</th>';
@@ -88,6 +111,9 @@
          $.ajax(data_ajax);
     });     
    
+    $(document).on('change',"#search_product_modal input[name='busq']",function(){
+        $("#search_product_modal #product_search_input").trigger('keyup');
+    });
 
     $(document).on('click',"#search_product_modal table tr",function(e){
 
@@ -132,12 +158,12 @@
                 }
 
                 if (ficha_tecnica_detalle.length < 1) {
-                    var output = "<p style='font-size:20px; color:#000000'>El Articulo <b style='color:red'> " + valor + " </b> <br> No posee Ficha Técnica en Mercedario.<br> Por favor, ingrese datos manualmente<p>";
+                    var output = "<p style='font-size:20px; color:#000000'>El Articulo <b style='color:red'> " + product_nombre + " </b> <br> No posee Ficha Técnica en Mercedario.<br> Por favor, ingrese datos manualmente<p>";
                     swal({
                         title: "Advertencia!",text: output,
                         type: "warning",confirmButtonText: "Ok",html: true
                     });
-                    color = data.Color.Color;
+                    //color = data.Color.Color;
                     return false;
                 }
 

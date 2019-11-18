@@ -3,11 +3,9 @@
   <div class="col-12">
       <div id="tipo_producto_selector" class="btn-group special btn-group-toggle" data-toggle="buttons">
           <label class="btn btn-secondary  btn-toggle active" >
-            <input type="radio" class="tipo_producto_hab" name="tipo_producto" id="tipo_producto" value="0"  checked> Habitual
-          </label>
+            <input type="radio" class="tipo_producto_hab" name="tipo_producto" id="tipo_producto" value="0"  checked> Habitual</label>
           <label class="btn btn-secondary btn-toggle" >
-            <input type="radio" class="tipo_producto_nue" name="tipo_producto" id="tipo_producto" value="1" > Nuevo
-          </label>
+            <input type="radio" class="tipo_producto_nue" name="tipo_producto" id="tipo_producto" value="1" >Nuevo</label>
       </div>
 
   </div>                  
@@ -32,13 +30,13 @@
   <div class="col-6">
     <div class="form-group text-left">
       <label class="form-label" for="input_producto_nombre">Artículo</label>
-      <input type="text" id="input_producto_nombre" name="producto[nombre]" class="form-control" placeholder="Artículo" disabled required>
+      <input type="text" id="input_producto_nombre" name="producto[nombre]" class="form-control" placeholder="Artículo" readonly required>
     </div>
   </div>
   <div class="col-6">
     <div class="form-group text-left">
       <label class="form-label" for="input_producto_motivo">Motivo</label>
-      <select id="input_producto_motivo" name="producto[motivo]" class="form-control" disabled>
+      <select id="input_producto_motivo" name="producto[motivo]" class="form-control" readonly>
           <option value="">Seleccionar</option>
           <option value='1' >Nuevo - Completamente</option>
           <option value='2' >Nuevo - Modificación</option>
@@ -56,10 +54,10 @@
       <label class="form-label" for="input_producto_cod_tango2"> {{'Reemplaza Anterior Producto ?'}}</label>
       <div class="btn-group special special2 btn-group-toggle" data-toggle="buttons">
           <label class="btn btn-secondary btn-sm  btn-toggle active">
-            <input type="radio"  id="reemplaza_si" name="producto[reemplaza]" value="0" autocomplete="off" disabled checked> NO
+            <input type="radio"  id="reemplaza_si" name="producto[reemplaza]" value="0"  readonly checked> NO
           </label>
           <label class="btn btn-secondary btn-sm btn-toggle">
-            <input type="radio" id="reemplaza_no" name="producto[reemplaza]" value="1" autocomplete="off" disabled> SI
+            <input type="radio" id="reemplaza_no" name="producto[reemplaza]" value="1"readonly> SI
           </label>
       </div>
     </div>
@@ -67,13 +65,13 @@
   <div class="col-3 form-aliceblue">
     <div class="form-group text-left">
       <label class="form-label" for="input_producto_polimero_cliente">Polimero a Cargo del Cliente %</label>
-      <input type="text" id="input_producto_polimero_cliente" name="producto[polimero_cliente]" class="form-control" placeholder="Artículo" disabled required>
+      <input type="text" id="input_producto_polimero_cliente" name="producto[polimero_cliente]" class="form-control" placeholder="Artículo" readonly required>
     </div>
   </div>  
   <div class="col-3 form-aliceblue">
       <div class="form-group text-left">
         <label class="form-label" for="input_producto_polimero_empaque">Polimero a Cargo de Empaque % </label>
-        <input type="text" id="input_producto_polimero_empaque" name="producto[polimero_empaque]" class="form-control" placeholder="Artículo" disabled required>
+        <input type="text" id="input_producto_polimero_empaque" name="producto[polimero_empaque]" class="form-control" placeholder="Artículo" readonly required>
       </div>
     </div>                
 </div>
@@ -84,7 +82,7 @@
   <div class="col-3">
     <div class="form-group text-left">
       <label class="form-label" for="input_producto_formato">Formato</label>
-      <select id="input_producto_formato" name="producto[formato]" class="form-control">
+      <select id="input_producto_formato" name="producto[formato]" class="form-control" required>
         <option value=""> Seleccionar un formato </option>
         @foreach ($formatos as $formato)
           <option value="{{$formato->idFormato}}"> {{$formato->descripcion}}</option>
@@ -95,8 +93,8 @@
   <div class="col-3">
     <div class="form-group text-left">
       <label class="form-label" for="input_producto_material">Material</label>
-      <select id="input_producto_material" name="producto[material]" class="form-control">
-        <option>-</option>
+      <select id="input_producto_material" name="producto[material]" class="form-control" required>
+        <option value=""> Seleccionar un Material </option>
         @foreach ($materiales as $material)
           <option value="{{$material->idMaterial}}"> {{$material->descripcion}}</option>
         @endforeach
@@ -107,14 +105,14 @@
   <div class="col-3">
     <div class="form-group text-left">
       <label class="form-label" for="input_producto_color">Color Material</label>
-      <input type="text" id="input_producto_color" name="producto[color_material]" class="form-control" placeholder="Color Material"  required>
+      <input type="text" id="input_producto_color" name="producto[color_material]" class="form-control " placeholder="Color Material"  required>
     </div>
   </div>
 
   <div class="col-3">
       <div class="form-group text-left">
         <label class="form-label" for="input_producto_origen">Origen</label>
-        <input type="text" id="input_producto_origen" name="producto['origen']" class="form-control" placeholder="Origen"  required>
+        <input type="text" id="input_producto_origen" name="producto['origen']" class="form-control " placeholder="Origen"  required>
       </div>
     </div>  
 </div>
@@ -123,19 +121,19 @@
     <div class="col-3">
       <div class="form-group text-left">
         <label class="form-label" for="input_producto_ancho">Ancho(cm)</label>
-        <input type="text" id="input_producto_ancho" name="producto[ancho]" class="form-control" placeholder="Color Material"  required>
+        <input type="text" id="input_producto_ancho" name="producto[ancho]" class="form-control money" placeholder="Color Material"  required>
       </div>
     </div>
     <div class="col-3">
       <div class="form-group text-left">
         <label class="form-label" for="input_producto_largo">Largo(cm)</label>
-        <input type="text" id="input_producto_largo" name="producto['largo']" class="form-control" placeholder="Origen"  required>
+        <input type="text" id="input_producto_largo" name="producto['largo']" class="form-control money" placeholder="Origen"  required>
       </div>
     </div>       
     <div class="col-3">
       <div class="form-group text-left">
         <label class="form-label" for="input_producto_micronaje">Micronaje(cm)</label>
-        <input type="text" id="input_producto_micronaje" name="producto['micronaje']" class="form-control" placeholder="Origen"  required>
+        <input type="text" id="input_producto_micronaje" name="producto['micronaje']" class="form-control money" placeholder="Origen"  required>
       </div>
     </div>  
     <div class="col-3">
@@ -205,20 +203,21 @@
         <div class="col-3">
             <div class="form-group text-left">
             <label class="form-label" for="input_fechaRecp">Recepción</label>
-            <input type="text" id="input_fechaRecp" name="fechaRecp" class="form-control" placeholder="Recepción" readonly value="Pendiente" >
+            <input type="text" id="input_fechaRecp" name="fechaRecp" class="form-control" placeholder="Recepción" readonly >
             </div>
         </div>
         <div class="col-3">
             <div class="form-group text-left">
             <label class="form-label" for="input_fechaApro">Aprobación</label>
-            <input type="text" id="input_fechaApro" name="fechaApro" class="form-control" placeholder="Recepción" readonly value="Pendiente" >
+            <input type="text" id="input_fechaApro" name="fechaApro" class="form-control" placeholder="Recepción" readonly  >
             </div>
         </div>
         <div class="col-3">
             <div class="form-group text-left">
-            <label class="form-label" for="input_fechaEntrega">Entrega</label>
-            <input type="date" id="input_fechaEntrega" name="fecha_entrega_original" class="form-control" placeholder="Recepcion" >
-            </div>
+            <label class="form-label" for="input_fechaEntrega">Entrega <span class="required">*</span></label>
+            <input type="text" id="input_fechaEntrega" name="fecha_entrega_original"  
+            data-toggle="datetimepicker" data-target="#input_fechaEntrega" class="form-control" placeholder="Fecha de Entrega"  required>           
+        </div>
         </div>
     </div>
 </fieldset>
@@ -229,14 +228,14 @@
         <div class="col-6">
             <div class="form-group text-left">
                 <label class="form-label" for="input_cantidad">Cantidad</label>
-                <input type="text" id="input_producto_cantidad" name="cantidad" class="form-control" placeholder="Cantidad" value=""  readonly  >
+                <input type="text" id="input_producto_cantidad" name="cantidad" class="form-control money" placeholder="Cantidad" value=""  readonly  required >
             </div>
         </div>
         <div class="col-6">
             <div class="form-group text-left">
                 <label class="form-label" for="input_cantidad">Unidades</label>
-                <select id="input_producto_unidades" name="unidades" class="form-control">
-                    <option value="0" selected="selected">Seleccionar Unidad</option>
+                <select id="input_producto_unidades" name="unidades" class="form-control" required>
+                    <option value="" selected>Seleccionar Unidad</option>
                     <option value="1">Unidades.</option>	
                     <option value="2">Kgs.</option>									
                 </select>
@@ -247,7 +246,7 @@
         <div class="col-3">
             <div class="form-group text-left">
                 <label class="form-label" for="input_moneda">Moneda</label>
-                <select id="input_producto_moneda" name="moneda" class="form-control">
+                <select id="input_producto_moneda" name="moneda" class="form-control" required>
                     <option value="0" "Selected">-</option>
                     <option value="1"> $ </option>
                     <option value="2"> U$D </option>
@@ -257,14 +256,14 @@
         <div class="col-3">
             <div class="form-group text-left">
                 <label class="form-label" for="input_precio">Precio</label>
-                <input type="text" id="input_producto_precio" name="precio" class="form-control" placeholder="Precio" value=""    >
+                <input type="text" id="input_producto_precio" name="precio" class="form-control" placeholder="Precio"   required >
             </div>
         </div>
         <div class="col-3">
             <div class="form-group text-left">
                 <label class="form-label" for="input_condicionPago">Impuesto</label>
-                <select id="input_condicionPago" name="condicionPago" class="form-control">
-                    <option value="0" "Selected">-</option>
+                <select id="input_condicionPago" name="condicionPago" class="form-control" required>
+                    <option value="" selected>-</option>
                     <option value="1"> +IVA </option>
                     <option value="2"> Exento </option>
                     <option value="3"> Final </option>
@@ -275,7 +274,7 @@
         <div class="col-3">
             <div class="form-group text-left">
                 <label class="form-label" for="input_precio_origen">Origen Precio</label>
-                <select id="input_precio_origen" name="precio_origen" class="form-control">
+                <select id="input_precio_origen" name="precio_origen" class="form-control" required>
                     <option value="">Seleccionar</option>
                     <option value="1">Acuerdo Cliente</option>
                     <option value="2">Lista de Precios</option>

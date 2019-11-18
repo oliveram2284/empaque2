@@ -82,10 +82,27 @@
       }
     });
 
-
+    $.datepicker.regional['es'] = {
+      closeText: 'Cerrar',
+      prevText: '< Ant',
+      nextText: 'Sig >',
+      currentText: 'Hoy',
+      monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+      monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+      dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+      dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
+      dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+      weekHeader: 'Sm',
+      dateFormat: 'dd/mm/yy',
+      firstDay: 1,
+      isRTL: false,
+      showMonthAfterYear: false,
+      yearSuffix: ''
+      };
+      $.datepicker.setDefaults($.datepicker.regional['es']);
     
-
-    $(function() {    
+    var campos_obligatorios=null;
+    $(function() {   
 
       var labels= {
         cancel: "Cancelar",
@@ -118,14 +135,47 @@
       });   
       
       
+      $('#input_fechaEntrega').datetimepicker({
+        locale: 'es',
+        icons: {
+          time: 'fa fa-clock-o',
+          date: 'fa fa-calendar',
+          up: 'fa fa-arrow-up',
+          down: 'fa fa-arrow-down',
+          previous: 'fa fa-arrow-left',
+          next: 'fa fa-arrow-right',
+        },
+        daysOfWeekDisabled: [0, 6],
+        useCurrent: false,
+        format: 'D-M-Y',
+      })
+
+      /*$('.money').mask('000.000.000.000.000,00');
+      $('.money2').mask("#.##0,00");*/
+      //$('.money').maskMoney({allowNegative: true, decimal:",", thousands:'.'});
+
+
       $(document).on('change','input[name="tipo_producto"]',function(e){
+        var tipo_producto = $(this).val();
+
+        console.log("====> TIPO PRODUCTO: %o",tipo_producto);
+        console.log("===> Resetear campos : %o");    
+        
+        console.log("===> Resetear campos : %o");    
+        $("#form-step-cliente-p-1 input:not([name='tipo_producto']").val(null);
+        $("#form-step-cliente-p-1 select").prop('selectedIndex', 0); 
+
       
-        console.log("====> TIPO PRODUCTO: %o",$(this).val());
         var disabled=false;
-        if($(this).val()=='1'){ //Habitual        
-          var _disabled=true;
+        if($(this).val()=='1'){ //NUEVO        
+          $("#input_producto_nombre,#input_producto_polimero_cliente,#input_producto_polimero_empaque,#input_producto_motivo,#reemplaza_si,#reemplaza_no").removeAttr('readonly');  
+        }else{ //HABITUAL
+          $("#input_producto_nombre,#input_producto_polimero_cliente,#input_producto_polimero_empaque,#input_producto_motivo,#reemplaza_si,#reemplaza_no").attr('readonly',true);  
+          
         }
 
+        
+        return false; 
         //$("#input_producto_codigo").attr("disabled",_disabled);
         $("#input_producto_cod_tango").attr("disabled",_disabled);
         $("#input_producto_nombre").attr("disabled",!_disabled);
@@ -197,6 +247,8 @@
               }
               default:break;
             }
+
+            campos_obligatorios=data.result.responseText;
             //input.val(null);
             //input.attr('disabled',true);
 
@@ -205,6 +257,9 @@
         },
 
       });
+
+      console.log("====> campos_obligatorios: %o",campos_obligatorios);
+
       return;
     });
 
@@ -271,7 +326,7 @@
       $.ajax(data_ajax);
       return;
     }
-
+    
 
     $("#table_cant tbody tr ").on('click', function() {
       console.log("===> OPTION CLICKED: %o", $(this).find('i').length);
@@ -373,18 +428,78 @@
       console.log("==> radios_cants: %o", radios_cants.length);
       $(".cant_allowed").find("li.alert-danger").remove();
       if (radios_cants.length == 0) {
-          $(".cant_etiquetas_allowed").append("<li class='alert alert-danger'>Debe seleccionar una cantidad disponible</li>");
-          return false;
+        $(".cant_etiquetas_allowed").append("<li class='alert alert-danger'>Debe seleccionar una cantidad disponible</li>");
+        return false;
       } else {
-          $(".cant_etiquetas_allowed").find("li.alert-danger").remove();
+        $(".cant_etiquetas_allowed").find("li.alert-danger").remove();
       }
       $("#input_producto_cantidad").val(radios_cants.val()).focus();
       $("#etiqueta_cantidad_modal").modal("hide");
-  });
+    });
 
 
 
-    
+    var procesa_cantidades_bolsa = function(){
+      var id_formato=$("#input_producto_formato").val();
+      var largo=$("#input_producto_largo").val();
+
+      var url= "{{route('ajax_request.obtener_cantidad','')}}"+"/"+id_formato;
+
+      var data_ajax={
+        type: 'GET',
+        url: url,
+        beforeSend:function(xhr){
+          xhr.overrideMimeType( "text/plain; charset=x-user-defined" );
+        },
+        success: function(data) {
+          console.log("=DATA: %o",data);
+          
+					if(data.result.length<1){
+						$("#cantidad").removeAttr("readonly");
+						return false;
+					}else{
+						$(this).attr("readonly","readonly");
+          }
+          
+					var tbody_content="";
+					$.each(data.result,function(index, item){
+            
+						if(parseFloat(item.largo).toFixed(2)==parseFloat(largo).toFixed(2)){
+
+							tbody_content +='<tr data-id="'+item.id+'"  data-multiplo="'+item.multiplo+'">';
+							tbody_content +='<td><a href="#" data-id="'+item.id+'"  data-multiplo="'+item.multiplo+'" class=""><i class="fa fa-circle-o fa-2x " aria-hidden="true"></i></a></td>';
+							tbody_content +='<td>'+item.descripcion+'</td>';
+							tbody_content +='<td>'+parseFloat(item.largo).toFixed(1)+'</td>';
+							tbody_content +='<td>'+parseFloat(item.ancho).toFixed(1)+'</td>';
+							tbody_content +='<td>'+item.multiplo+'</td>';
+              tbody_content +='</tr>';
+              
+						}
+
+
+					});
+
+					if(tbody_content==''){
+						$("#cantidad").removeAttr("readonly");
+						return false;
+					}
+					$("#table_cant").find("tbody").html(tbody_content);
+					$("#table_cant tbody  ").find("tr:first-child").trigger("click");
+        	$("#cantidad_modal").modal("show");
+
+        },
+        error:function(){
+            console.log("===> error Carga Formato");
+        },
+        complete:function(){
+        	//$("#cantidad_modal").modal("show");
+        },
+        dataType: 'json'
+      };
+      $.ajax(data_ajax);
+
+      return false;
+    }
 
     $(document).on('click',"#input_producto_cantidad",function(e){
       var id_formato=$("#input_producto_formato").val();
@@ -409,8 +524,7 @@
         case '14':
         case '15':{
           console.log("====>  FORMATO %",id_formato);
-          procesa_cantidades_bolsa(id_formato,largo);
-          
+          procesa_cantidades_bolsa();
           break;
         }
         default:{
@@ -448,6 +562,7 @@
 		  });*/
 			var cant=$(this).val();
       var multiplo=$("#multiplo_cant").val();
+
       console.log("====> $(this).val(): %o",$(this).val());
       console.log("====> cant: %o",cant);
       console.log("====> multiplo: %o",multiplo);
@@ -468,24 +583,7 @@
 				}
       }
       
-      var list_li="";
-      /*
-			if( cant == min || cant == max ){
-					list_li+='<li  class="list-group-item" >';
-          //list_li+=' <input type="radio" value="'+cant+'" name="cantidad_opciones[]"> Cantidad Permitida: '+cant;
-          list_li+='<label class="cui-utils-control cui-utils-control-radio">First checkbox';
-              list_li+='    <input type="radio" name="radio" checked="checked">';
-              list_li+='    <span class="cui-utils-control-indicator"></span>';
-              list_li+='  </label>';
-          list_li+='</li>';
-    	}else{
-				if(i==1){
-					min=0;
-				}else{
-					list_li+='<li  class="list-group-item"><input type="radio" value="'+min+'" name="cantidad_opciones[]"> Cantidad Permitida : '+min+'</li>';
-				}
-				list_li+='<li  class="list-group-item" ><input type="radio" value="'+max+'" name="cantidad_opciones[]"> Cantidad Permitida: '+max+'</li>';
-      }*/
+      var list_li="";    
       if( cant == min || cant == max ){
 
         list_li+='<li  class="list-group-item" >';
@@ -583,16 +681,50 @@
           return validation_ok;
           break;
         
-        case 1:
+        case 1:{
           console.log("====> STEP 1- ARTICULo ");
+
           section='#form-step-cliente-p-1';
+          var producto_tipo=$('input[name="tipo_producto"]:checked').val();
+
+          console.log("====> STEP 1- ARTICULO: %o",producto_tipo);
+
           var inputs = $("#formPedidos "+section+" [name]");
+
           $("#formPedidos "+section+" .form-group").removeClass('has-danger');
-          console.log("====> inputs",inputs);
-          return;
+         
+          var validation_ok=true;
+          $.each(inputs,function(index,item){
+            console.log("====> item: %o",item);
+            if($(item).attr('required') && (!$(item).attr('readonly') && !$(item).attr('disabled')) &&  $(item).val().length==0){
+
+              //if(($(item).attr('id')=='input_producto_polimero_cliente' ||  $(item).attr('id')=='input_producto_polimero_empaque') &&  producto_tipo )
+
+              $(item).parent('.form-group').addClass('has-danger');   
+              swal({
+                title: "Error!",
+                text: "<b>Debe Completar: "+$(item).attr('name').toUpperCase()+".</b>",
+                type: "error",
+                html: true,
+                confirmButtonText: "Cerrar"
+              });     
+              validation_ok = false;
+              return false;
+              if( validation_ok ){       
+                validation_ok = false;
+              }
+
+            }
+
+          });
+          console.log("=====> validation_ok: %o",validation_ok);
+          return validation_ok;
           break;
-        
+        }
         case 2:
+          var section='#form-step-cliente-p-2';
+
+          return true;
           break;
         
         case 3:

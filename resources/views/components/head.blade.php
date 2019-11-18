@@ -99,6 +99,8 @@
   <script src="{{ URL::asset('cleanui/components/menu-right/common/menu-right.cleanui.js') }}"></script>
   <script src="{{ URL::asset('cleanui/components/blog/common/blog.cleanui.js') }}"></script>
   <script src="{{ URL::asset('cleanui/components/github/common/github.cleanui.js') }}"></script>
+  
+  <script src="{{ URL::asset('js/jquery.maskMoney.js') }}"></script>
 
 
   <!-- PRELOADER STYLES-->

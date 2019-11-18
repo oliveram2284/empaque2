@@ -84,7 +84,7 @@
                     if(response!=0 && response !== undefined){
                     $.each(response.clients,function(index, item){
                         if(index % 2){
-                            output+='<tr class="table-success">';
+                            output+='<tr class="table-success" data-cliente="'+encodeURIComponent(JSON.stringify(item))+'">';
                         }else{
                             output+='<tr data-cliente="'+encodeURIComponent(JSON.stringify(item))+'" >';
                         }

@@ -21,12 +21,12 @@ class AjaxController extends Controller
     }
 
 
-    public function SearchProduct($keyword){        
+    public function SearchProduct($keyword,$atype=1){        
 
         $params=array(
             'xinput'=>$keyword,
             'xpage'=>1,
-            'busq'=>1
+            'busq'=>$atype
         );     
            
         $url='http://58d70548161e.sn.mynetname.net:301/empaque_demo/buscarProducto.php';
