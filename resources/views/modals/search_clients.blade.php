@@ -88,7 +88,7 @@
                         }else{
                             output+='<tr data-cliente="'+encodeURIComponent(JSON.stringify(item))+'" >';
                         }
-                        output+='<td class="text-center"><a class="btn btn-sm btn-rounded btn-icon btn-success mr-2" ><i class="icmn-checkmark2" aria-hidden="true"></i></a></td>'
+                        output+='<td class="text-center"><a class="btn btn-sm btn-xs btn-rounded btn-icon btn-success mr-2" ><i class="icmn-checkmark2" aria-hidden="true"></i></a></td>'
                         output+='<th scope="row">'+item.cod_client+'</th>';
                         output+='<td>'+item.razon_soci+'</td>'
                         output+='</tr>';

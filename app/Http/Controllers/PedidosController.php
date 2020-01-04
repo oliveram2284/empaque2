@@ -31,6 +31,11 @@ class PedidosController extends Controller
         return view('pedidos.form',$params);  
     }
 
+
+    public function store(Request $request){
+        dd($request->all()  );
+    }
+
     public function emitidos(){
         $user = auth()->user();
        

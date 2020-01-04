@@ -1,4 +1,44 @@
 <fieldset>
+    <legend class="form">Datos Impresión</legend>
+    <div class="row">
+        <div class="col-4">
+            <div class="form-group text-left">
+                <label class="form-label" for="input_caras">Caras</label>
+                <select id="input_caras" name="caras" class="form-control">
+                        <option value=''>Seleccionar</option>
+                        <option value="0">Sin Impresión</option>
+                        <option value="1">1 Cara</option>
+                        <option value="2">2 Caras</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="form-group text-left">
+                <label class="form-label" for="input_centrada">Tipo Imp</label>
+                <select id="input_centrada" name="centrada" class="form-control">
+                    <option selected>Seleccionar</option>
+                    <option value="2">Ningúna</option>
+                    <option value="1">Centrada</option>
+                    <option value="0">Corrida</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="form-group text-left">
+                <label class="form-label" for="input_tipo">Horientación</label>
+                <select id="input_tipo" name="tipo" class="form-control">
+                    <option selected>Seleccionar</option>
+                    <option value="2">Ninguna</option>
+                    <option value="1">Apaisada</option>
+                    <option value="0">Común</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    
+</fieldset>
+
+<fieldset>
     <legend class="form">Bobinado</legend>
     <div class="row">
         <div class="col-4">
@@ -59,45 +99,7 @@
     
 </fieldset>
     
-<fieldset>
-    <legend class="form">Datos Impresión</legend>
-    <div class="row">
-        <div class="col-4">
-            <div class="form-group text-left">
-                <label class="form-label" for="input_caras">Caras</label>
-                <select id="input_caras" name="caras" class="form-control">
-                        <option selected>Seleccionar</option>
-                        <option value="0">Sin Impresión</option>
-                        <option value="1">1 Cara</option>
-                        <option value="2">2 Caras</option>
-                </select>
-            </div>
-        </div>
-        <div class="col-4">
-            <div class="form-group text-left">
-                <label class="form-label" for="input_centrada">Tipo Imp</label>
-                <select id="input_centrada" name="centrada" class="form-control">
-                    <option selected>Seleccionar</option>
-                    <option value="2">Ningúna</option>
-                    <option value="1">Centrada</option>
-                    <option value="0">Corrida</option>
-                </select>
-            </div>
-        </div>
-        <div class="col-4">
-            <div class="form-group text-left">
-                <label class="form-label" for="input_tipo">Horientación</label>
-                <select id="input_tipo" name="tipo" class="form-control">
-                    <option selected>Seleccionar</option>
-                    <option value="2">Ninguna</option>
-                    <option value="1">Apaisada</option>
-                    <option value="0">Común</option>
-                </select>
-            </div>
-        </div>
-    </div>
-    
-</fieldset>
+
 
 <fieldset>
     <legend class="form">Descripción Laminado</legend>
@@ -106,7 +108,7 @@
         <div class="col-4">
             <div class="form-group text-left">
                 <label class="form-label" for="input_bilaminado1"> Lamina 1 Material</label>
-                <select id="input_bilaminado1" name="bilaminado[]" class="form-control">
+                <select id="input_bilaminado1" name="bilaminado[]" class="form-control" disabled readonly>
                         <option selected>Seleccionar</option>
                         <option value="0">Sin Impresión</option>
                         <option value="1">1 Cara</option>
@@ -117,7 +119,7 @@
         <div class="col-4">
             <div class="form-group text-left">
                 <label class="form-label" for="input_material1">Color</label>
-                <select id="input_material1" name="material[]" class="form-control">
+                <select id="input_material1" name="material[]" class="form-control" disabled readonly>
                         <option value="1">Selecc.</option>
                         <option value="14">CRISTAL</option>
                         <option value="13">BLANCO</option>
@@ -129,7 +131,7 @@
         <div class="col-4">
             <div class="form-group text-left">
                 <label class="form-label" for="input_micronaje1">Micronaje</label>
-                <input type="text" id="input_micronaje1" name="micronaje[]" class="form-control" placeholder="Micronaje"  >
+                <input type="text" id="input_micronaje1" name="micronaje[]" class="form-control" placeholder="Micronaje"  disabled readonly>
             </div>
         </div>
     </div>
@@ -138,7 +140,7 @@
         <div class="col-4">
             <div class="form-group text-left">
                 <label class="form-label" for="input_bilaminado2"> Lamina 2 Material</label>
-                <select id="input_bilaminado2" name="bilaminado[]" class="form-control">
+                <select id="input_bilaminado2" name="bilaminado[]" class="form-control" disabled readonly>
                         <option selected>Seleccionar</option>
                         <option value="0">Sin Impresión</option>
                         <option value="1">1 Cara</option>
@@ -149,7 +151,7 @@
         <div class="col-4">
             <div class="form-group text-left">
                 <label class="form-label" for="input_material2">Color</label>
-                <select id="input_material2" name="material[]" class="form-control">
+                <select id="input_material2" name="material[]" class="form-control" disabled readonly>
                     <option value="1">Selecc.</option>
                     <option value="14">CRISTAL</option>
                     <option value="13">BLANCO</option>
@@ -161,7 +163,7 @@
         <div class="col-4">
             <div class="form-group text-left">
                 <label class="form-label" for="input_micronaje2">Micronaje</label>
-                <input type="text" id="input_micronaje2" name="micronaje[]" class="form-control" placeholder="Micronaje"  >
+                <input type="text" id="input_micronaje2" name="micronaje[]" class="form-control" placeholder="Micronaje"  disabled readonly>
             </div>
         </div>
     </div>
@@ -170,7 +172,7 @@
             <div class="col-4">
                 <div class="form-group text-left">
                     <label class="form-label" for="input_bilaminado3"> Lamina 3 Material</label>
-                    <select id="input_bilaminado3" name="bilaminado[]" class="form-control">
+                    <select id="input_bilaminado3" name="bilaminado[]" class="form-control" disabled readonly>
                             <option selected>Seleccionar</option>
                             <option value="0">Sin Impresión</option>
                             <option value="1">1 Cara</option>
@@ -181,7 +183,7 @@
             <div class="col-4">
                 <div class="form-group text-left">
                     <label class="form-label" for="input_material3">Color</label>
-                    <select id="input_material3" name="material[]" class="form-control">
+                    <select id="input_material3" name="material[]" class="form-control" disabled readonly>
                         <option value="1">Selecc.</option>
                         <option value="14">CRISTAL</option>
                         <option value="13">BLANCO</option>
@@ -193,7 +195,7 @@
             <div class="col-4">
                 <div class="form-group text-left">
                     <label class="form-label" for="input_micronaje3">Micronaje</label>
-                    <input type="text" id="input_micronaje3" name="micronaje[]" class="form-control" placeholder="Micronaje"  >
+                    <input type="text" id="input_micronaje3" name="micronaje[]" class="form-control" placeholder="Micronaje"  disabled readonly >
                 </div>
             </div>
         </div>

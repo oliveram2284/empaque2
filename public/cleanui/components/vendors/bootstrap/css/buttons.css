@@ -91,6 +91,10 @@
     padding: 0.53rem;
 }
 
+.btn.btn-icon.btn-xs {
+    padding: 0.2rem;
+}
+
 .btn.btn-icon.btn-lg {
     padding: 1.53rem;
 }

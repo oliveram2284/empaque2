@@ -44,7 +44,7 @@ Route::resource('empresas','EmpresasController')->middleware('auth');
 
 
 Route::get('pedidos/nuevo','PedidosController@create')->name('pedidos.nuevo')->middleware('auth');  
-Route::get('pedidos/store','PedidosController@store')->name('pedidos.store')->middleware('auth');  
+Route::post('pedidos/store','PedidosController@store')->name('pedidos.store')->middleware('auth');  
 Route::get('pedidos/emitidos','PedidosController@emitidos')->name('pedidos.emitidos')->middleware('auth');  
 Route::get('pedidos/recibidos','PedidosController@recibidos')->name('pedidos.recibidos')->middleware('auth');  
 

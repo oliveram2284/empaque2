@@ -71,6 +71,10 @@
     'use strict'
     //ABRIR MODAL BUSCADOR ARTICULOS
     $(document).on('click',"#input_producto_codigo ",function(e){
+        var producto_tipo=$('input[name="tipo_producto"]:checked').val();
+        if(producto_tipo=='1'){
+            return false;
+        }
         $("#search_product_modal").modal('show'); 
     });
 
@@ -93,7 +97,7 @@
                     }else{
                         output+='<tr class="" data-id="'+item.Id+'" data-id="'+item.Id+'" data-nombre="'+item.Articulo+'" data-nombrefact="'+item.Nombre_en_Facturacion+'">';
                     }
-                    output+='<td class="text-center"><a class="btn btn-sm btn-rounded btn-icon btn-success mr-2" ><i class="icmn-checkmark2" aria-hidden="true"></i></a></td>'
+                    output+='<td class="text-center"><a class="btn btn-sm btn-xs btn-rounded btn-icon btn-success mr-2" ><i class="icmn-checkmark2" aria-hidden="true"></i></a></td>'
                     output+='<th scope="row">'+item.Id+'</th>';
                     output+='<th scope="row">'+item.Articulo+'</th>';
                     output+='<th scope="row">'+item.Nombre_en_Facturacion+'</th>';

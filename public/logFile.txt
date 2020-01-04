@@ -1,18 +1,18 @@
 *   Trying 200.59.80.205...
 * TCP_NODELAY set
 * Connected to 58d70548161e.sn.mynetname.net (200.59.80.205) port 301 (#0)
-> GET /empaque_demo/buscarProductoFicha.php?id=B0Z039024B4 HTTP/1.1
+> GET /empaque_demo/buscarProductoFicha.php?id=B0Z365001A2 HTTP/1.1
 Host: 58d70548161e.sn.mynetname.net:301
 Accept: */*
 Content-Type: application/json
 Connection: Keep-Alive
 
 < HTTP/1.1 200 OK
-< Date: Mon, 18 Nov 2019 14:41:56 GMT
+< Date: Thu, 02 Jan 2020 19:39:45 GMT
 < Server: Apache/2.2.21 (Win32) PHP/5.3.10
 < X-Powered-By: PHP/5.3.10
 < Access-Control-Allow-Origin: *
-< Set-Cookie: PHPSESSID=4t7ar9n85rbi3s6bq113erl6m7; path=/
+< Set-Cookie: PHPSESSID=0eelt5k8n6706cdo9dd7hf3bi4; path=/
 < Expires: Thu, 19 Nov 1981 08:52:00 GMT
 < Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
 < Pragma: no-cache

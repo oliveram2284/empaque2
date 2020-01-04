@@ -21,7 +21,7 @@
   <div class="col-6">
     <div class="form-group text-left">
       <label class="form-label" for="input_producto_cod_tango">Código Tango</label>
-      <input type="text" id="input_producto_cod_tango" name="producto['codigo_tango']" class="form-control" placeholder="Código Tango"  required>
+      <input type="text" id="input_producto_cod_tango" name="producto['codigo_tango']" class="form-control" placeholder="Código Tango"  readonly required>
     </div>
   </div>                      
 </div>
@@ -53,8 +53,8 @@
     <div class="form-group text-left">
       <label class="form-label" for="input_producto_cod_tango2"> {{'Reemplaza Anterior Producto ?'}}</label>
       <div class="btn-group special special2 btn-group-toggle" data-toggle="buttons">
-          <label class="btn btn-secondary btn-sm  btn-toggle active">
-            <input type="radio"  id="reemplaza_si" name="producto[reemplaza]" value="0"  readonly checked> NO
+          <label class="btn btn-secondary btn-sm  btn-toggle">
+            <input type="radio"  id="reemplaza_si" name="producto[reemplaza]" value="0"  readonly> NO
           </label>
           <label class="btn btn-secondary btn-sm btn-toggle">
             <input type="radio" id="reemplaza_no" name="producto[reemplaza]" value="1"readonly> SI
@@ -71,7 +71,7 @@
   <div class="col-3 form-aliceblue">
       <div class="form-group text-left">
         <label class="form-label" for="input_producto_polimero_empaque">Polimero a Cargo de Empaque % </label>
-        <input type="text" id="input_producto_polimero_empaque" name="producto[polimero_empaque]" class="form-control" placeholder="Artículo" readonly required>
+        <input type="text" id="input_producto_polimero_empaque" name="producto[polimero_empaque]" class="form-control disabled" placeholder="Artículo" readonly required>
       </div>
     </div>                
 </div>
@@ -223,7 +223,7 @@
 </fieldset>
 
 <fieldset>
-    <legend class="form">Vólumen Pedido</legend>
+    <legend class="form">Volúmen Pedido</legend>
     <div class="row">
         <div class="col-6">
             <div class="form-group text-left">
@@ -296,10 +296,10 @@
       
 
     function reset_inputs(){
-      var codigoProductop=$("#input_producto_codigo");
-        console.debug(codigoProductop.val().length);
+      var codigoProducto=$("#input_producto_codigo");
+        console.debug(codigoProducto.val().length);
   
-      if(codigoProductop.val().length<1){
+      if(codigoProducto.val().length<1){
         console.debug("LImpiar code");
         $("#input_producto_ancho").attr('readonly', true);
         $("#input_producto_ancho").val("");

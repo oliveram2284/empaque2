@@ -12,8 +12,8 @@
         <div class="row">
                 <div class="col-lg-12">
           
-                        <form id="formPedidos" >
-                          
+                        <form id="formPedidos" action="{{route('pedidos.store')}}" method="POST">
+                          @csrf
                           <div id="form-step-cliente" class="wizard "mb-5"">
                             <h3>
                               <i class="icmn-user wizard-steps-icon"></i>
@@ -51,11 +51,11 @@
               
                             <h3>
                               <i class="icmn-checkmark wizard-steps-icon"></i>
-                              <span class="wizard-steps-title">Confirmation</span>
+                              <span class="wizard-steps-title">Confirmar Pedido</span>
                             </h3>
                             <section class="text-center">
                               <h3 class="d-none">Title</h3>
-                              <p>The next and previous buttons help you to navigate through your content.</p>
+                              <p>Desea Confirmar el pedido?</p>
                             </section>
                           </div>
                           
@@ -131,6 +131,7 @@
         },
         onFinished: function (event, currentIndex){
           alert("Submitted!");
+          $("form").submit();
         }
       });   
       
@@ -156,6 +157,7 @@
 
 
       $(document).on('change','input[name="tipo_producto"]',function(e){
+        
         var tipo_producto = $(this).val();
 
         console.log("====> TIPO PRODUCTO: %o",tipo_producto);
@@ -168,27 +170,26 @@
       
         var disabled=false;
         if($(this).val()=='1'){ //NUEVO        
-          $("#input_producto_nombre,#input_producto_polimero_cliente,#input_producto_polimero_empaque,#input_producto_motivo,#reemplaza_si,#reemplaza_no").removeAttr('readonly');  
+          $("#input_producto_nombre,#input_producto_polimero_cliente,#input_producto_motivo,#reemplaza_si,#reemplaza_no").removeAttr('readonly');  
         }else{ //HABITUAL
-          $("#input_producto_nombre,#input_producto_polimero_cliente,#input_producto_polimero_empaque,#input_producto_motivo,#reemplaza_si,#reemplaza_no").attr('readonly',true);  
+          $("#input_producto_nombre,#input_producto_polimero_cliente,#input_producto_motivo,#reemplaza_si,#reemplaza_no").attr('readonly',true);  
           
         }
-
         
         return false; 
-        //$("#input_producto_codigo").attr("disabled",_disabled);
+        /*//$("#input_producto_codigo").attr("disabled",_disabled);
         $("#input_producto_cod_tango").attr("disabled",_disabled);
         $("#input_producto_nombre").attr("disabled",!_disabled);
         $("#input_producto_motivo").attr("disabled",!_disabled);
         $("#reemplaza_si").attr("disabled",!_disabled);
         $("#reemplaza_no").attr("disabled",!_disabled);
         $("#input_producto_polimero_cliente").attr("disabled",!_disabled);
-        $("#input_producto_polimero_empaque").attr("disabled",!_disabled);        
+        $("#input_producto_polimero_empaque").attr("disabled",!_disabled);       */ 
 
       });
       console.log('====> $(tipo_producto).val()',$('input[name="tipo_producto"]').val());
 
-
+      /*
       var _disabled=false;
       if( $('input[name="tipo_producto"]').val()=='0'){
         var _disabled=true;        
@@ -202,16 +203,33 @@
       $("#reemplaza_no").attr("disabled",!_disabled);
       $("#input_producto_polimero_cliente").attr("disabled",!_disabled);
       $("#input_producto_polimero_empaque").attr("disabled",!_disabled);  
-
+      */
       
     });
 
     $('#input_fechaEntrega').datetimepicker();
 
+    $(document).on('change','#input_producto_polimero_cliente',function(e){
+
+      var polim_cli = parseFloat($(this).val());
+      var polim_emp = 0;
+      if (polim_cli < 100) {
+        polim_emp = 100 - polim_cli;
+      } else if (polim_cli > 100) {
+          polim_cli = 100;
+          polim_emp = 0;
+      }
+      $(this).val(polim_cli);
+      console.log("===> Polim_emp",polim_emp)
+      console.log("===> polim_cli",polim_cli)
+      $("#input_producto_polimero_empaque").val(polim_emp);
+      return ;
+
+    });
+
 
 
     $(document).on('change','#input_producto_formato',function(e){
-
      
       var formato_id=$(this).val();
       var url= "{{route('ajax_request.campos_obligatorios','')}}";
@@ -503,27 +521,43 @@
 
     $(document).on('click',"#input_producto_cantidad",function(e){
       var id_formato=$("#input_producto_formato").val();
-      switch (id_formato) {
-        case '0':{          
-          console.log("====> FORMATO 0");
-          swal({
-            title: "Error!",
-            text: "<b>Debe Seleccionar Formato.</b>",
-            type: "error",
-            html: true,
-            confirmButtonText: "Cerrar"
-          });
-          $("#input_producto_largo").focus();          
-          break;
-        }
-        case '6':{
+      var largo=$("#input_producto_largo").val();
+      console.log("====> FORMATO ID y LARGO: %o - %o",id_formato,largo);
+
+      if(id_formato==''||id_formato==0){
+        swal({
+          title: "Error!",
+          text: "<b>Debe Seleccionar Formato.</b>",
+          type: "error",
+          html: true,
+          confirmButtonText: "Cerrar"
+        });
+        $("#input_producto_largo").focus();          
+        return false;
+      }
+
+      if(largo==''||largo==0){
+        swal({
+          title: "Error!",
+          text: "<b>Debe Ingresar Largo Producto.</b>",
+          type: "error",
+          html: true,
+          confirmButtonText: "Cerrar"
+        });
+        $("#input_producto_largo").focus();          
+        return false;
+      }
+
+      switch (id_formato) {        
+        case '6':{  
+          console.log("====>  obtiene_cantidad_etiqueta FORMATO %",id_formato);
           obtiene_cantidad_etiqueta();
           break;
         }
         case '13':
         case '14':
         case '15':{
-          console.log("====>  FORMATO %",id_formato);
+          console.log("====>  procesa_cantidades_bolsa FORMATO %",id_formato);
           procesa_cantidades_bolsa();
           break;
         }
@@ -637,7 +671,19 @@
     
 
 
+    //
+    $(document).on('change','#input_caras',function(e){
 
+      var value=$(this).val();
+      var disabled=(value=='0');
+      
+      $("#input_centrada").attr('readonly',disabled);
+      $("#input_centrada").attr('disabled',disabled);
+      $("#input_tipo").attr('readonly',disabled);
+      $("#input_tipo").attr('disabled',disabled);
+
+
+    });
 
     
     
@@ -653,7 +699,7 @@
         case 0:
           //valida datos clientes
           console.log("====> STEP 1 ");
-          section='#form-step-cliente-p-0';
+          section='#form-step-cliente-p-0';          
 
           var inputs = $("#formPedidos "+section+" [name]");
 
@@ -688,46 +734,146 @@
           var producto_tipo=$('input[name="tipo_producto"]:checked').val();
 
           console.log("====> STEP 1- ARTICULO: %o",producto_tipo);
-
           var inputs = $("#formPedidos "+section+" [name]");
+          $("#formPedidos "+section+" .form-group").removeClass('has-danger');       
+          if(producto_tipo==0){
+               
+            var validation_ok=true;
 
-          $("#formPedidos "+section+" .form-group").removeClass('has-danger');
-         
-          var validation_ok=true;
-          $.each(inputs,function(index,item){
-            console.log("====> item: %o",item);
-            if($(item).attr('required') && (!$(item).attr('readonly') && !$(item).attr('disabled')) &&  $(item).val().length==0){
+            $.each(inputs,function(index,item){
+              console.log("====> item: %o",item);
+              if($(item).attr('required') && (!$(item).attr('readonly') && !$(item).attr('disabled')) &&  $(item).val().length==0){
 
-              //if(($(item).attr('id')=='input_producto_polimero_cliente' ||  $(item).attr('id')=='input_producto_polimero_empaque') &&  producto_tipo )
+                $(item).parent('.form-group').addClass('has-danger');   
+                swal({
+                  title: "Error!",
+                  text: "<b>Debe Completar: "+$(item).attr('name').toUpperCase()+".</b>",
+                  type: "error",
+                  html: true,
+                  confirmButtonText: "Cerrar"
+                });     
+                validation_ok = false;
+                return false;
+                if( validation_ok ){       
+                  validation_ok = false;
+                }
+              }
+            });
+            console.log("=====> validation_ok: %o",validation_ok);
+            return validation_ok;
 
-              $(item).parent('.form-group').addClass('has-danger');   
+          }else{
+            console.log("====> Producto Nuevo: %o",producto_tipo);            
+            if($("#input_producto_nombre").val().length==0){
               swal({
                 title: "Error!",
-                text: "<b>Debe Completar: "+$(item).attr('name').toUpperCase()+".</b>",
-                type: "error",
+                text: "<b>Eligio cargar un producto nuevo, <br> entonces debe cargar la descripción de este.</b>",
+                type: "warning",
                 html: true,
                 confirmButtonText: "Cerrar"
               });     
-              validation_ok = false;
+              $("#input_producto_nombre").focus();
               return false;
-              if( validation_ok ){       
-                validation_ok = false;
-              }
-
             }
 
-          });
-          console.log("=====> validation_ok: %o",validation_ok);
-          return validation_ok;
+            if($("#input_producto_motivo").val().length==0){
+              swal({title: "Error!",text: "<b>Debe Seleccionar un Motivo.</b>",
+                type: "warning",html: true,confirmButtonText: "Cerrar"
+              });    
+              $("#input_producto_motivo").focus();
+              return false; 
+            }
+            //$('input[name="tipo_producto"]:checked').val()
+            if($('input[name="producto[reemplaza]"]').is(':checked') == false){
+              swal({title: "Error!",text: "<b>Debe Especificar si Reemplaza al producto Anterior.</b>",
+                type: "warning",html: true,confirmButtonText: "Cerrar"
+              });  
+              $("#reemplaza_si").focus();
+              return false;    
+            }
+
+            if($('#input_producto_polimero_cliente').val().length==0){
+              swal({title: "Error!",text: "<b>Debe debe ingresar porcentaje a cargo.</b>",
+                type: "warning",html: true,confirmButtonText: "Cerrar"
+              });  
+              $("#reemplaza_si").focus();
+              return false;    
+            }
+
+          }
+
+          if($('#input_fechaEntrega').val().length==0){
+            swal({title: "Error!",text: "<b>Debe debe ingresar Fecha de Entrega.</b>",
+              type: "warning",html: true,confirmButtonText: "Cerrar"
+            });  
+            $("#input_fechaEntrega").focus();
+            return false;    
+          }
+
+          if($('#input_producto_cantidad').val().length==0){
+            swal({title: "Error!",text: "<b>Debe debe ingresar Cantidad.</b>",
+              type: "warning",html: true,confirmButtonText: "Cerrar"
+            });  
+            $("#input_fechaEntrega").focus();
+            return false;    
+          }
+          if($('#input_producto_cantidad').val().length==0){
+            swal({title: "Error!",text: "<b>Debe debe ingresar Cantidad.</b>",
+              type: "warning",html: true,confirmButtonText: "Cerrar"
+            });  
+            $("#input_fechaEntrega").focus();
+            return false;    
+          }
+
+
+          //TODO: VALIDAR OTROS CAMPOS
+          
           break;
         }
         case 2:
           var section='#form-step-cliente-p-2';
 
-          return true;
+          console.log("===0> $('#input_caras').val(): %o",$('#input_caras').val());
+          console.log("===0> $('#input_caras').val().length: %o",$('#input_caras').val().length );
+          if($('#input_caras').val().length==0){
+            swal({title: "Error!",text: "<b>Debe debe ingresar Cantidad de Caras.</b>",
+              type: "warning",html: true,confirmButtonText: "Cerrar"
+            });  
+            $("#input_caras").focus();
+            return false;    
+          }else{
+
+            if($('#input_caras').val()!=0){
+
+              if($('#input_centrada').val().length!=0){
+                swal({title: "Error!",text: "<b>Debe Seleccionar Tipo de Impresion.</b>",
+                  type: "warning",html: true,confirmButtonText: "Cerrar"
+                });  
+                $("#input_caras").focus();            
+              }
+
+
+              if($('#input_tipo').val().length!=0){
+                swal({title: "Error!",text: "<b>Debe Seleccionar Horientacion.</b>",
+                  type: "warning",html: true,confirmButtonText: "Cerrar"
+                });  
+                $("#input_caras").focus();            
+              }
+
+              return false;    
+
+            }
+          }
+
+
+
+          return true;   
           break;
         
         case 3:
+
+
+
           break;
         default:
           return true;
